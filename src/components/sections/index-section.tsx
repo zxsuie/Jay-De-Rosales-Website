@@ -63,7 +63,7 @@ export function IndexSection() {
             const containerRect = containerRef.current.getBoundingClientRect();
             setPosition({
                 x: rect.right - containerRect.left + 20,
-                y: rect.top - containerRect.top + rect.height / 2
+                y: rect.top - containerRect.top
             });
         }
     };
