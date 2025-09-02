@@ -4,24 +4,31 @@ import Image from "next/image";
 
 export function Hero() {
   return (
-    <section className="flex items-center justify-center min-h-screen text-center px-4">
-      <div className="flex flex-col items-center">
-        <div className="mb-8 animate-fade-in" style={{ animationDelay: '200ms', opacity: 0, animationFillMode: 'forwards' }}>
+    <section className="relative flex items-center justify-center min-h-screen text-center px-4 overflow-hidden">
+      <div className="relative flex flex-col items-center justify-center">
+        <div
+          className="relative z-10 mb-[-4rem] md:mb-[-6rem] animate-fade-in"
+          style={{ animationDelay: '200ms', opacity: 0, animationFillMode: 'forwards' }}
+        >
           <Image
             src="https://picsum.photos/400/500"
             alt="Jay De Rosales"
             width={400}
             height={500}
-            className="rounded-lg object-cover"
+            className="rounded-lg object-cover w-[250px] h-auto md:w-[400px]"
             data-ai-hint="portrait man"
+            priority
           />
         </div>
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold font-headline leading-tight animate-fade-in" style={{ animationDelay: '500ms', opacity: 0, animationFillMode: 'forwards' }}>
-          John Doe
-        </h1>
-        <p className="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-foreground/80 animate-fade-in" style={{ animationDelay: '900ms', opacity: 0, animationFillMode: 'forwards' }}>
-          Helping people start again in business and life—with clarity, grit, and proven strategies.
-        </p>
+        <div
+          className="relative z-0 animate-fade-in"
+          style={{ animationDelay: '500ms', opacity: 0, animationFillMode: 'forwards' }}
+        >
+          <h1 className="text-7xl md:text-9xl lg:text-[10rem] font-bold font-headline leading-none">
+            <span className="block">Jay De</span>
+            <span className="block">Rosales</span>
+          </h1>
+        </div>
       </div>
     </section>
   );
