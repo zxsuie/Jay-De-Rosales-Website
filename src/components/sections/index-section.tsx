@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
@@ -37,43 +37,49 @@ export function IndexSection() {
     const [activeImage, setActiveImage] = useState<string | null>(null);
     const [imageHint, setImageHint] = useState<string | undefined>(undefined);
     const [transform, setTransform] = useState("perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)");
-    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [position, setPosition] = useState<{ x: number, y: number } | null>(null);
+    const containerRef = useRef<HTMLUListElement>(null);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
-            const { clientX, clientY, currentTarget } = e;
-            if (currentTarget instanceof HTMLElement) {
-                const { innerWidth: width, innerHeight: height } = window;
-                const xPct = (clientX - width / 2) / 40;
-                const yPct = (clientY - height / 2) / 40;
-
-                setTransform(`perspective(1000px) rotateY(${xPct}deg) rotateX(${-yPct}deg) scale(1)`);
-                setPosition({ x: clientX, y: clientY });
-            }
+            const { clientX, clientY } = e;
+            const xPct = (clientX - window.innerWidth / 2) / 40;
+            const yPct = (clientY - window.innerHeight / 2) / 40;
+            setTransform(`perspective(1000px) rotateY(${xPct}deg) rotateX(${-yPct}deg) scale(1)`);
         };
 
-        window.addEventListener("mousemove", handleMouseMove as EventListener);
+        window.addEventListener("mousemove", handleMouseMove);
 
         return () => {
-            window.removeEventListener("mousemove", handleMouseMove as EventListener);
+            window.removeEventListener("mousemove", handleMouseMove);
         };
     }, []);
+
+    const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>, imageUrl: string, hint: string) => {
+        setActiveImage(imageUrl);
+        setImageHint(hint);
+        if (containerRef.current) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const containerRect = containerRef.current.getBoundingClientRect();
+            setPosition({
+                x: rect.right - containerRect.left + 20,
+                y: rect.top - containerRect.top + rect.height / 2
+            });
+        }
+    };
 
     return (
         <section id="index" className="py-24 sm:py-32 relative">
             <div className="container mx-auto px-4">
-                <div className="max-w-3xl mx-auto">
-                    <ul>
+                <div className="max-w-3xl mx-auto relative">
+                    <ul ref={containerRef}>
                         {projects.map((project, index) => (
                             <li key={project.title}>
                                 <ScrollReveal delay={index * 100}>
                                     <a 
                                         href="#" 
                                         className="block group py-8 border-b border-foreground/10 last:border-b-0"
-                                        onMouseEnter={() => {
-                                            setActiveImage(project.imageUrl);
-                                            setImageHint(project.dataAiHint);
-                                        }}
+                                        onMouseEnter={(e) => handleMouseEnter(e, project.imageUrl, project.dataAiHint)}
                                         onMouseLeave={() => setActiveImage(null)}
                                     >
                                         <div className="flex justify-between items-center">
@@ -90,32 +96,32 @@ export function IndexSection() {
                             </li>
                         ))}
                     </ul>
-                </div>
-            </div>
-            <div
-                className={cn(
-                    "pointer-events-none fixed top-0 left-0 z-50 transition-opacity duration-300",
-                    activeImage ? "opacity-100" : "opacity-0"
-                )}
-                style={{
-                    transform: `translate(${position.x}px, ${position.y}px) translate(-50%, -50%)`,
-                }}
-            >
-                {activeImage && (
-                    <div 
-                        className="relative w-[400px] h-auto aspect-video rounded-lg overflow-hidden shadow-2xl"
-                        style={{ transform: transform, willChange: 'transform' }}
+                     <div
+                        className={cn(
+                            "pointer-events-none absolute top-0 left-0 z-50 transition-opacity duration-300",
+                            activeImage && position ? "opacity-100" : "opacity-0"
+                        )}
+                        style={position ? {
+                            transform: `translate(${position.x}px, ${position.y}px) translateY(-50%)`,
+                        } : {}}
                     >
-                        <Image
-                            src={activeImage}
-                            alt="Project preview"
-                            width={400}
-                            height={250}
-                            className="object-cover"
-                            data-ai-hint={imageHint}
-                        />
+                        {activeImage && (
+                            <div 
+                                className="relative w-[400px] h-auto aspect-video rounded-lg overflow-hidden shadow-2xl"
+                                style={{ transform: transform, willChange: 'transform' }}
+                            >
+                                <Image
+                                    src={activeImage}
+                                    alt="Project preview"
+                                    width={400}
+                                    height={250}
+                                    className="object-cover"
+                                    data-ai-hint={imageHint}
+                                />
+                            </div>
+                        )}
                     </div>
-                )}
+                </div>
             </div>
         </section>
     );
