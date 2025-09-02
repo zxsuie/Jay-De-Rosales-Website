@@ -1,23 +1,81 @@
-import { ScrollReveal } from "@/components/ui/scroll-reveal";
+"use client";
+
+import { useState, useEffect } from "react";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { cn } from "@/lib/utils";
 
 const projects = [
-    { title: "Business Seminars", description: "Teaching entrepreneurs in the Philippines to start again stronger." },
-    { title: "Authored Book", description: "Sharing lessons on failure, resilience, and growth." },
-    { title: "Food Business Ventures", description: "Practical experience in building sustainable local businesses." },
-    { title: "Digital Community", description: "Mentoring entrepreneurs through an online network of support." },
+    { 
+        title: "Business Seminars", 
+        description: "Teaching entrepreneurs in the Philippines to start again stronger.",
+        imageUrl: "https://picsum.photos/600/400?random=1",
+        dataAiHint: "business seminar audience"
+    },
+    { 
+        title: "Authored Book", 
+        description: "Sharing lessons on failure, resilience, and growth.",
+        imageUrl: "https://picsum.photos/600/400?random=2",
+        dataAiHint: "book cover"
+    },
+    { 
+        title: "Food Business Ventures", 
+        description: "Practical experience in building sustainable local businesses.",
+        imageUrl: "https://picsum.photos/600/400?random=3",
+        dataAiHint: "local cafe"
+    },
+    { 
+        title: "Digital Community", 
+        description: "Mentoring entrepreneurs through an online network of support.",
+        imageUrl: "https://picsum.photos/600/400?random=4",
+        dataAiHint: "online community"
+    },
 ];
 
 export function IndexSection() {
+    const [activeImage, setActiveImage] = useState<string | null>(null);
+    const [imageHint, setImageHint] = useState<string | undefined>(undefined);
+    const [transform, setTransform] = useState("perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)");
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            const { clientX, clientY, currentTarget } = e;
+            if (currentTarget instanceof HTMLElement) {
+                const { innerWidth: width, innerHeight: height } = window;
+                const xPct = (clientX - width / 2) / 40;
+                const yPct = (clientY - height / 2) / 40;
+
+                setTransform(`perspective(1000px) rotateY(${xPct}deg) rotateX(${-yPct}deg) scale(1)`);
+                setPosition({ x: clientX, y: clientY });
+            }
+        };
+
+        window.addEventListener("mousemove", handleMouseMove as EventListener);
+
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove as EventListener);
+        };
+    }, []);
+
     return (
-        <section id="index" className="py-24 sm:py-32">
+        <section id="index" className="py-24 sm:py-32 relative">
             <div className="container mx-auto px-4">
                 <div className="max-w-3xl mx-auto">
                     <ul>
                         {projects.map((project, index) => (
                             <li key={project.title}>
                                 <ScrollReveal delay={index * 100}>
-                                    <a href="#" className="block group py-8 border-b border-foreground/10 last:border-b-0">
+                                    <a 
+                                        href="#" 
+                                        className="block group py-8 border-b border-foreground/10 last:border-b-0"
+                                        onMouseEnter={() => {
+                                            setActiveImage(project.imageUrl);
+                                            setImageHint(project.dataAiHint);
+                                        }}
+                                        onMouseLeave={() => setActiveImage(null)}
+                                    >
                                         <div className="flex justify-between items-center">
                                             <div>
                                                 <h3 className="text-2xl md:text-3xl font-bold font-headline text-foreground transition-colors duration-300 group-hover:text-muted-foreground">
@@ -33,6 +91,31 @@ export function IndexSection() {
                         ))}
                     </ul>
                 </div>
+            </div>
+            <div
+                className={cn(
+                    "pointer-events-none fixed top-0 left-0 z-50 transition-opacity duration-300",
+                    activeImage ? "opacity-100" : "opacity-0"
+                )}
+                style={{
+                    transform: `translate(${position.x}px, ${position.y}px) translate(-50%, -50%)`,
+                }}
+            >
+                {activeImage && (
+                    <div 
+                        className="relative w-[400px] h-auto aspect-video rounded-lg overflow-hidden shadow-2xl"
+                        style={{ transform: transform, willChange: 'transform' }}
+                    >
+                        <Image
+                            src={activeImage}
+                            alt="Project preview"
+                            width={400}
+                            height={250}
+                            className="object-cover"
+                            data-ai-hint={imageHint}
+                        />
+                    </div>
+                )}
             </div>
         </section>
     );
