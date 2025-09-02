@@ -143,7 +143,7 @@ export function VideoSection() {
   }, [emblaApi]);
 
   return (
-    <section id="videos" className="py-24 sm:py-32 bg-secondary/30">
+    <section id="videos" className="min-h-screen flex items-center justify-center bg-secondary/30">
       <div className="container mx-auto px-4 relative">
         <ScrollReveal delay={200}>
           <div className="overflow-hidden" ref={emblaRef}>
