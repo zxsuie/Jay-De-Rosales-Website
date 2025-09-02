@@ -12,11 +12,7 @@ export function IndexSection() {
     return (
         <section id="index" className="py-24 sm:py-32">
             <div className="container mx-auto px-4">
-                <ScrollReveal>
-                    <h2 className="text-3xl md:text-4xl font-bold font-headline text-center">Index</h2>
-                </ScrollReveal>
-                
-                <div className="mt-16 max-w-3xl mx-auto">
+                <div className="max-w-3xl mx-auto">
                     <ul>
                         {projects.map((project, index) => (
                             <li key={project.title}>
