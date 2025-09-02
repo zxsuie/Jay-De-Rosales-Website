@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect, useRef } from 'react';
 import {
   Carousel,
   CarouselContent,
@@ -30,6 +33,60 @@ const videos = [
   },
 ];
 
+const VideoCard = ({ video }: { video: typeof videos[0] }) => {
+  const [transform, setTransform] = useState("perspective(1000px) rotateY(0deg) rotateX(0deg)");
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (ref.current) {
+        const { left, top, width, height } = ref.current.getBoundingClientRect();
+        const x = (e.clientX - (left + width / 2)) / 25; // Sensitivity
+        const y = (e.clientY - (top + height / 2)) / 25; // Sensitivity
+        setTransform(`perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg)`);
+      }
+    };
+
+    const handleMouseLeave = () => {
+      setTransform("perspective(1000px) rotateY(0deg) rotateX(0deg)");
+    };
+
+    const currentRef = ref.current;
+    currentRef?.addEventListener("mousemove", handleMouseMove);
+    currentRef?.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      currentRef?.removeEventListener("mousemove", handleMouseMove);
+      currentRef?.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
+  return (
+    <div className="p-1">
+      <div 
+        ref={ref}
+        className="relative aspect-video overflow-hidden rounded-lg group"
+        style={{ transform: transform, transition: 'transform 0.2s ease-out', willChange: 'transform' }}
+      >
+        <Image
+          src={video.thumbnailUrl}
+          alt={video.title}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          data-ai-hint={video.dataAiHint}
+        />
+        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+          <PlayCircle className="h-20 w-20 text-white/70 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
+        </div>
+        <div className="absolute bottom-0 left-0 p-4">
+          <h3 className="text-lg font-bold text-white shadow-lg">{video.title}</h3>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
 export function VideoSection() {
   return (
     <section id="videos" className="py-24 sm:py-32 bg-secondary/30">
@@ -53,23 +110,7 @@ export function VideoSection() {
             <CarouselContent>
               {videos.map((video) => (
                 <CarouselItem key={video.id} className="md:basis-1/2 lg:basis-1/1">
-                  <div className="p-1">
-                    <div className="relative aspect-video overflow-hidden rounded-lg group">
-                      <Image
-                        src={video.thumbnailUrl}
-                        alt={video.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        data-ai-hint={video.dataAiHint}
-                      />
-                      <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                        <PlayCircle className="h-20 w-20 text-white/70 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
-                      </div>
-                      <div className="absolute bottom-0 left-0 p-4">
-                        <h3 className="text-lg font-bold text-white shadow-lg">{video.title}</h3>
-                      </div>
-                    </div>
-                  </div>
+                  <VideoCard video={video} />
                 </CarouselItem>
               ))}
             </CarouselContent>
