@@ -167,12 +167,12 @@ export function VideoSection() {
             </div>
           </div>
         </ScrollReveal>
-        <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full px-0 sm:-px-8 md:-px-12 lg:-px-16">
+        <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full px-0 sm:px-2 md:px-4 left-0 right-0">
           <Button
             onClick={scrollPrev}
             variant="ghost"
             size="icon"
-            className="h-12 w-12 rounded-full bg-background/50 hover:bg-background/80"
+            className="h-12 w-12 rounded-full bg-background/60 hover:bg-background/90 shadow-lg"
           >
             <ArrowLeft className="h-6 w-6" />
           </Button>
@@ -180,7 +180,7 @@ export function VideoSection() {
             onClick={scrollNext}
             variant="ghost"
             size="icon"
-            className="h-12 w-12 rounded-full bg-background/50 hover:bg-background/80"
+            className="h-12 w-12 rounded-full bg-background/60 hover:bg-background/90 shadow-lg"
           >
             <ArrowRight className="h-6 w-6" />
           </Button>
