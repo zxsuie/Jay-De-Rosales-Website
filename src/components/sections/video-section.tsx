@@ -3,9 +3,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import useEmblaCarousel, { type EmblaCarouselType } from 'embla-carousel-react';
 import Image from "next/image";
-import { PlayCircle } from "lucide-react";
+import { PlayCircle, ArrowLeft, ArrowRight } from "lucide-react";
 import { ScrollReveal } from "../ui/scroll-reveal";
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 const videos = [
   {
@@ -71,7 +72,7 @@ const VideoCard = ({ video }: { video: typeof videos[0] }) => {
   return (
     <div 
         ref={ref}
-        className="relative aspect-video overflow-hidden rounded-lg group w-full h-full"
+        className="relative aspect-video overflow-hidden rounded-lg group w-full h-full shadow-2xl"
         style={{ transform: transform, transition: 'transform 0.2s ease-out', willChange: 'transform' }}
       >
         <Image
@@ -133,19 +134,19 @@ export function VideoSection() {
     emblaApi.on('reInit', onScroll);
   }, [emblaApi, onScroll]);
 
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
   return (
     <section id="videos" className="py-24 sm:py-32 bg-secondary/30">
-      <div className="container mx-auto px-4">
-        <ScrollReveal>
-          <h2 className="text-3xl md:text-4xl font-bold font-headline text-center">
-            Watch Me in Action
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-foreground/80 text-center">
-            From keynote speeches to intimate coaching sessions, here’s a glimpse into my work.
-          </p>
-        </ScrollReveal>
+      <div className="container mx-auto px-4 relative">
         <ScrollReveal delay={200}>
-          <div className="mt-16 overflow-hidden" ref={emblaRef}>
+          <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex" style={{ backfaceVisibility: 'hidden' }}>
               {videos.map((video, index) => (
                 <div 
@@ -166,6 +167,24 @@ export function VideoSection() {
             </div>
           </div>
         </ScrollReveal>
+        <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full px-0 sm:-px-8 md:-px-12 lg:-px-16">
+          <Button
+            onClick={scrollPrev}
+            variant="ghost"
+            size="icon"
+            className="h-12 w-12 rounded-full bg-background/50 hover:bg-background/80"
+          >
+            <ArrowLeft className="h-6 w-6" />
+          </Button>
+          <Button
+            onClick={scrollNext}
+            variant="ghost"
+            size="icon"
+            className="h-12 w-12 rounded-full bg-background/50 hover:bg-background/80"
+          >
+            <ArrowRight className="h-6 w-6" />
+          </Button>
+        </div>
       </div>
     </section>
   );
