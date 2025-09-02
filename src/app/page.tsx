@@ -5,6 +5,7 @@ import { Info } from '@/components/sections/info';
 import { Approach } from '@/components/sections/approach';
 import { IndexSection } from '@/components/sections/index-section';
 import { Contact } from '@/components/sections/contact';
+import { VideoSection } from '@/components/sections/video-section';
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <div className="flex-grow">
         <Hero />
         <Info />
+        <VideoSection />
         <Approach />
         <IndexSection />
         <Contact />
