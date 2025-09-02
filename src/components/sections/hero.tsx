@@ -24,7 +24,7 @@ export function Hero() {
           className="relative z-0 animate-fade-in"
           style={{ animationDelay: '500ms', opacity: 0, animationFillMode: 'forwards' }}
         >
-          <h1 className="text-7xl md:text-9xl lg:text-[10rem] font-bold font-headline leading-none">
+          <h1 className="text-8xl md:text-[10rem] lg:text-[14rem] font-bold font-headline leading-none">
             <span className="block">Jay De</span>
             <span className="block">Rosales</span>
           </h1>
