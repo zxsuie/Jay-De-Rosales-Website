@@ -41,7 +41,7 @@ export function Hero() {
             alt="Jay De Rosales"
             width={400}
             height={500}
-            className="rounded-lg object-cover w-[250px] h-auto md:w-[400px] transition-transform duration-500 ease-out"
+            className="rounded-lg object-cover w-[250px] h-auto md:w-[400px] transition-transform duration-500 ease-out shadow-2xl"
             style={{ 
               transform: transform,
               willChange: 'transform'
