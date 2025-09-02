@@ -61,9 +61,10 @@ export function IndexSection() {
         if (containerRef.current) {
             const rect = e.currentTarget.getBoundingClientRect();
             const containerRect = containerRef.current.getBoundingClientRect();
+            // Center the image over the link
             setPosition({
-                x: rect.right - containerRect.left + 20,
-                y: rect.top - containerRect.top
+                x: rect.left + rect.width / 2 - containerRect.left,
+                y: rect.top + rect.height / 2 - containerRect.top
             });
         }
     };
@@ -98,11 +99,11 @@ export function IndexSection() {
                     </ul>
                      <div
                         className={cn(
-                            "pointer-events-none absolute top-0 left-0 z-50 transition-opacity duration-300",
+                            "pointer-events-none absolute top-0 left-0 z-10 transition-opacity duration-300",
                             activeImage && position ? "opacity-100" : "opacity-0"
                         )}
                         style={position ? {
-                            transform: `translate(${position.x}px, ${position.y}px) translateY(-50%)`,
+                            transform: `translate(${position.x}px, ${position.y}px) translate(-50%, -50%)`,
                         } : {}}
                     >
                         {activeImage && (
