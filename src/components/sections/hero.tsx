@@ -7,7 +7,7 @@ export function Hero() {
     <section className="relative flex items-center justify-center min-h-screen text-center px-4 overflow-hidden">
       <div className="relative flex flex-col items-center justify-center">
         <div
-          className="relative z-10 mb-[-5rem] md:mb-[-7rem] animate-fade-in"
+          className="relative z-10 mb-[-10rem] md:mb-[-14rem] animate-fade-in"
           style={{ animationDelay: '200ms', opacity: 0, animationFillMode: 'forwards' }}
         >
           <Image
