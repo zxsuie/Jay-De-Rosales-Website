@@ -61,9 +61,9 @@ export function IndexSection() {
         if (containerRef.current) {
             const rect = e.currentTarget.getBoundingClientRect();
             const containerRect = containerRef.current.getBoundingClientRect();
-            // Center the image over the link
+            // Center the image over the link and shift it right
             setPosition({
-                x: rect.left + rect.width / 2 - containerRect.left,
+                x: rect.left + rect.width / 2 - containerRect.left + 100, // Adjusted for rightward shift
                 y: rect.top + rect.height / 2 - containerRect.top
             });
         }
@@ -72,6 +72,16 @@ export function IndexSection() {
     return (
         <section id="index" className="py-24 sm:py-32 relative">
             <div className="container mx-auto px-4">
+                 <div className="text-center mb-16">
+                    <ScrollReveal>
+                        <h2 className="text-4xl md:text-5xl font-bold font-headline">Core Work</h2>
+                    </ScrollReveal>
+                    <ScrollReveal delay={150}>
+                        <p className="mt-4 max-w-2xl mx-auto text-lg text-foreground/70">
+                            A curated collection of projects, ventures, and content that define my mission.
+                        </p>
+                    </ScrollReveal>
+                </div>
                 <div className="max-w-3xl mx-auto relative">
                     <ul ref={containerRef}>
                         {projects.map((project, index) => (
