@@ -1,16 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { useState, useEffect, useRef, useCallback } from 'react';
+import useEmblaCarousel, { type EmblaCarouselType } from 'embla-carousel-react';
 import Image from "next/image";
 import { PlayCircle } from "lucide-react";
 import { ScrollReveal } from "../ui/scroll-reveal";
+import { cn } from '@/lib/utils';
 
 const videos = [
   {
@@ -30,6 +25,18 @@ const videos = [
     thumbnailUrl: "https://picsum.photos/1280/720?random=3",
     title: "A Message on Resilience",
     dataAiHint: "motivational speech"
+  },
+    {
+    id: 4,
+    thumbnailUrl: "https://picsum.photos/1280/720?random=4",
+    title: "Business Fundamentals",
+    dataAiHint: "business meeting"
+  },
+  {
+    id: 5,
+    thumbnailUrl: "https://picsum.photos/1280/720?random=5",
+    title: "Leading with Empathy",
+    dataAiHint: "team collaboration"
   },
 ];
 
@@ -62,10 +69,9 @@ const VideoCard = ({ video }: { video: typeof videos[0] }) => {
   }, []);
 
   return (
-    <div className="p-1">
-      <div 
+    <div 
         ref={ref}
-        className="relative aspect-video overflow-hidden rounded-lg group"
+        className="relative aspect-video overflow-hidden rounded-lg group w-full h-full"
         style={{ transform: transform, transition: 'transform 0.2s ease-out', willChange: 'transform' }}
       >
         <Image
@@ -82,12 +88,51 @@ const VideoCard = ({ video }: { video: typeof videos[0] }) => {
           <h3 className="text-lg font-bold text-white shadow-lg">{video.title}</h3>
         </div>
       </div>
-    </div>
   );
 };
 
 
 export function VideoSection() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: 'center',
+    containScroll: 'trimSnaps',
+  });
+
+  const [scale, setScale] = useState<(number | undefined)[]>([]);
+
+  const onScroll = useCallback(() => {
+    if (!emblaApi) return;
+
+    const engine = emblaApi.internalEngine();
+    const scrollProgress = emblaApi.scrollProgress();
+
+    const styles = emblaApi.scrollSnapList().map((scrollSnap, index) => {
+      let diffToTarget = scrollSnap - scrollProgress;
+      if (engine.options.loop) {
+        engine.slideLooper.loopPoints.forEach(loopPoint => {
+          const target = loopPoint.target();
+          if (index === loopPoint.index && target !== 0) {
+            const sign = Math.sign(target);
+            if (sign === -1) diffToTarget = scrollSnap - (1 + scrollProgress);
+            if (sign === 1) diffToTarget = scrollSnap + (1 - scrollProgress);
+          }
+        });
+      }
+      const scale = 1 - Math.abs(diffToTarget) * 0.4;
+      return scale < 0 ? 0 : scale;
+    });
+    setScale(styles);
+  }, [emblaApi]);
+
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onScroll();
+    emblaApi.on('scroll', onScroll);
+    emblaApi.on('reInit', onScroll);
+  }, [emblaApi, onScroll]);
+
   return (
     <section id="videos" className="py-24 sm:py-32 bg-secondary/30">
       <div className="container mx-auto px-4">
@@ -100,23 +145,26 @@ export function VideoSection() {
           </p>
         </ScrollReveal>
         <ScrollReveal delay={200}>
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            className="w-full max-w-5xl mx-auto mt-16"
-          >
-            <CarouselContent>
-              {videos.map((video) => (
-                <CarouselItem key={video.id} className="md:basis-1/2 lg:basis-1/1">
-                  <VideoCard video={video} />
-                </CarouselItem>
+          <div className="mt-16 overflow-hidden" ref={emblaRef}>
+            <div className="flex" style={{ backfaceVisibility: 'hidden' }}>
+              {videos.map((video, index) => (
+                <div 
+                  key={video.id} 
+                  className="flex-[0_0_80%] sm:flex-[0_0_70%] md:flex-[0_0_50%] lg:flex-[0_0_45%] min-w-0 pl-4 relative"
+                >
+                  <div
+                    style={{
+                        transform: `scale(${scale[index] ?? 0})`,
+                        opacity: scale[index],
+                        transition: 'transform 0.3s ease-out, opacity 0.3s ease-out'
+                    }}
+                  >
+                    <VideoCard video={video} />
+                  </div>
+                </div>
               ))}
-            </CarouselContent>
-            <CarouselPrevious className="hidden sm:flex" />
-            <CarouselNext className="hidden sm:flex" />
-          </Carousel>
+            </div>
+          </div>
         </ScrollReveal>
       </div>
     </section>
