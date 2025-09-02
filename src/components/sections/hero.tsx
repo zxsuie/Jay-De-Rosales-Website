@@ -1,21 +1,65 @@
 "use client";
 
+import { useState, useEffect, useRef } from 'react';
 import Image from "next/image";
+import { cn } from '@/lib/utils';
 
 export function Hero() {
+  const [transform, setTransform] = useState("");
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+
+      const { left, top, width, height } = containerRef.current.getBoundingClientRect();
+      const x = (e.clientX - left - width / 2) / 25;
+      const y = (e.clientY - top - height / 2) / 25;
+
+      setTransform(`perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg) scale3d(1.05, 1.05, 1.05)`);
+    };
+
+    const handleMouseLeave = () => {
+      setTransform("perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)");
+    };
+
+    const currentRef = containerRef.current;
+    if (currentRef) {
+      currentRef.addEventListener("mousemove", handleMouseMove);
+      currentRef.addEventListener("mouseleave", handleMouseLeave);
+    }
+
+    return () => {
+      if (currentRef) {
+        currentRef.removeEventListener("mousemove", handleMouseMove);
+        currentRef.removeEventListener("mouseleave", handleMouseLeave);
+      }
+    };
+  }, []);
+
   return (
     <section className="relative flex items-center justify-center min-h-screen text-center px-4 overflow-hidden">
       <div className="relative flex flex-col items-center justify-center">
         <div
+          ref={containerRef}
           className="relative z-10 mb-[-10rem] md:mb-[-14rem] animate-fade-in"
-          style={{ animationDelay: '200ms', opacity: 0, animationFillMode: 'forwards' }}
+          style={{ 
+            animationDelay: '200ms', 
+            opacity: 0, 
+            animationFillMode: 'forwards',
+            transformStyle: 'preserve-3d'
+          }}
         >
           <Image
             src="https://picsum.photos/400/500"
             alt="Jay De Rosales"
             width={400}
             height={500}
-            className="rounded-lg object-cover w-[250px] h-auto md:w-[400px]"
+            className="rounded-lg object-cover w-[250px] h-auto md:w-[400px] transition-transform duration-500 ease-out"
+            style={{ 
+              transform: transform,
+              willChange: 'transform'
+            }}
             data-ai-hint="portrait man"
             priority
           />
