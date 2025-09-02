@@ -17,7 +17,7 @@ export function Hero() {
           />
         </div>
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold font-headline leading-tight animate-fade-in" style={{ animationDelay: '500ms', opacity: 0, animationFillMode: 'forwards' }}>
-          Jay De Rosales
+          John Doe
         </h1>
         <p className="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-foreground/80 animate-fade-in" style={{ animationDelay: '900ms', opacity: 0, animationFillMode: 'forwards' }}>
           Helping people start again in business and life—with clarity, grit, and proven strategies.
