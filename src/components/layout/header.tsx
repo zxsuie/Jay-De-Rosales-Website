@@ -30,7 +30,7 @@ export function Header() {
         <div className="flex items-center justify-between w-full mix-blend-difference">
           <Link 
             href="/" 
-            className="text-lg font-bold font-headline tracking-wider text-white text-shadow transition-colors duration-300"
+            className="text-lg font-bold font-headline tracking-wider text-white transition-colors duration-300"
           >
             JDR
           </Link>
@@ -41,7 +41,7 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-white text-shadow transition-colors duration-300 relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-current after:scale-x-0 after:origin-center after:transition-transform hover:after:scale-x-100"
+                className="text-sm font-medium text-white transition-colors duration-300 relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-current after:scale-x-0 after:origin-center after:transition-transform hover:after:scale-x-100"
               >
                 {link.label}
               </a>
