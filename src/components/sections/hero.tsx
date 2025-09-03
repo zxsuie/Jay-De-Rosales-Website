@@ -53,7 +53,7 @@ export function Hero() {
         </div>
         
         {/* Wrapper to push text to the bottom */}
-        <div className="relative z-10 flex flex-col justify-end w-full h-screen pb-20">
+        <div className="flex flex-col justify-end w-full h-screen pb-20">
             {/* The heading is layered on top with a mix-blend-difference to invert colors */}
             <div
                 className="animate-fade-in w-full mix-blend-difference text-white"
