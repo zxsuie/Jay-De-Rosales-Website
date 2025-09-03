@@ -24,14 +24,16 @@ export function Header() {
     }
   }, [isMenuOpen]);
 
+  const textClasses = "text-white text-stroke text-shadow-md";
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="w-full text-white mix-blend-difference">
+        <div className="w-full">
           <div className="flex items-center justify-between">
               <Link 
                 href="/" 
-                className="text-lg font-bold font-headline tracking-wider"
+                className={cn("text-lg font-bold font-headline tracking-wider", textClasses)}
               >
                 JDR
               </Link>
@@ -42,7 +44,7 @@ export function Header() {
                   <a
                     key={link.href}
                     href={link.href}
-                    className="text-sm font-medium relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-current after:scale-x-0 after:origin-center after:transition-transform hover:after:scale-x-100"
+                    className={cn("text-sm font-medium relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-current after:scale-x-0 after:origin-center after:transition-transform hover:after:scale-x-100", textClasses)}
                   >
                     {link.label}
                   </a>
@@ -55,7 +57,7 @@ export function Header() {
                   variant="ghost" 
                   size="icon" 
                   onClick={() => setIsMenuOpen(true)} 
-                  className="hover:bg-black/10"
+                  className={cn("hover:bg-black/10", textClasses)}
                 >
                   <Menu className="h-6 w-6" />
                 </Button>
