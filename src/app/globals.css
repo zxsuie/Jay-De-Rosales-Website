@@ -97,7 +97,7 @@
 
 /* Approach Section Styles */
 .approach-scroller {
-  height: 600vh; /* Adjust height based on number of sections */
+  /* height: 600vh; Adjust height based on number of sections. Now set dynamically */
   position: relative;
 }
 

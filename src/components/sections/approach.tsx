@@ -44,35 +44,39 @@ const storySections = [
 
 export function ApproachSection() {
   const [activeSection, setActiveSection] = useState(0);
+  const [sectionHeight, setSectionHeight] = useState(0);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const textScrollerRef = useRef<HTMLDivElement>(null);
-  const sectionHeight = typeof window !== 'undefined' ? window.innerHeight : 1000;
   const numSections = storySections.length;
 
   useEffect(() => {
+    // Set section height on client mount to avoid hydration errors
+    setSectionHeight(window.innerHeight);
+
     const handleScroll = () => {
-      if (scrollerRef.current && textScrollerRef.current) {
+      if (scrollerRef.current && textScrollerRef.current && window.innerHeight > 0) {
         const { top, height } = scrollerRef.current.getBoundingClientRect();
         const scrollAmount = -top;
+        const currentSectionHeight = window.innerHeight;
         
-        if (scrollAmount >= 0 && scrollAmount <= height - sectionHeight) {
-          const progress = scrollAmount / (height - sectionHeight);
+        if (scrollAmount >= 0 && scrollAmount <= height - currentSectionHeight) {
+          const progress = scrollAmount / (height - currentSectionHeight);
           const currentSection = Math.min(Math.floor(progress * numSections), numSections - 1);
           setActiveSection(currentSection);
 
           // Calculate text scroll position
           const totalTextScroll = textScrollerRef.current.scrollHeight;
-          const textScrollPosition = progress * (totalTextScroll + sectionHeight) - sectionHeight;
+          const textScrollPosition = progress * (totalTextScroll + currentSectionHeight) - currentSectionHeight;
 
           textScrollerRef.current.style.transform = `translateY(${-textScrollPosition}px)`;
         
-        } else if (scrollAmount > height - sectionHeight) {
+        } else if (scrollAmount > height - currentSectionHeight) {
           // Handle end state
            const finalSection = numSections -1;
            setActiveSection(finalSection);
            const endText = textScrollerRef.current.children[finalSection] as HTMLElement;
            if(endText) {
-             const endPosition = endText.offsetTop - (sectionHeight / 2) + (endText.clientHeight / 2);
+             const endPosition = endText.offsetTop - (currentSectionHeight / 2) + (endText.clientHeight / 2);
              textScrollerRef.current.style.transform = `translateY(${-endPosition}px)`;
            }
         }
@@ -80,12 +84,24 @@ export function ApproachSection() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [sectionHeight, numSections]);
+    // Also handle resize to update sectionHeight if needed
+    const handleResize = () => setSectionHeight(window.innerHeight);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener('resize', handleResize);
+    };
+  }, [numSections]);
+
+  if (sectionHeight === 0) {
+    // Render a placeholder or null until the client-side height is determined
+    return <section id="approach" className="relative bg-black h-screen" />;
+  }
 
   return (
     <section id="approach" className="relative bg-black">
-      <div ref={scrollerRef} className="approach-scroller">
+      <div ref={scrollerRef} className="approach-scroller" style={{ height: `${numSections * sectionHeight}px`}}>
         <div className="approach-sticky-container">
           {/* Background Images */}
           {storySections.map((section, index) => (
