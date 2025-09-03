@@ -74,8 +74,6 @@ export function EndCreditsSection() {
     const handleScroll = () => {
       if (containerRef.current) {
         const { top } = containerRef.current.getBoundingClientRect();
-        // We want the scrollY to be 0 when the top of the container is at the top of the viewport
-        // and increase as we scroll down.
         setScrollY(Math.max(0, -top));
       }
     };
@@ -87,21 +85,25 @@ export function EndCreditsSection() {
   }, []);
   
   if (viewportHeight === 0) {
-    // Return a placeholder with the estimated final height to prevent layout shifts
-    return <div className="h-[600vh] bg-black" />;
+    return <div style={{ height: `${storySections.length * 100}vh` }} />;
   }
 
-  // Calculate the scrolling progress of the text itself.
-  // We want the text to scroll from bottom to top over the course of the container's scroll.
   const textScrollTotal = storySections.length * sectionHeight;
   const textScrollProgress = Math.max(0, scrollY - viewportHeight / 2) / (containerHeight - viewportHeight);
   const textScrollY = viewportHeight - (textScrollProgress * textScrollTotal);
   
-  const currentSectionIndex = Math.min(storySections.length - 1, Math.floor(scrollY / sectionHeight));
+  const currentSectionIndex = Math.min(storySections.length, Math.floor(scrollY / sectionHeight));
 
-  // Final logo fade-in logic
   const endThreshold = containerHeight - viewportHeight * 1.5;
   const logoOpacity = scrollY > endThreshold ? Math.min(1, (scrollY - endThreshold) / (viewportHeight * 0.5)) : 0;
+  
+  // Calculate background fade-in
+  const bgFadeStart = 0;
+  const bgFadeEnd = viewportHeight / 2;
+  let bgOpacity = 0;
+  if (scrollY >= bgFadeStart) {
+    bgOpacity = Math.min(1, (scrollY - bgFadeStart) / (bgFadeEnd - bgFadeStart));
+  }
 
   return (
     <section 
@@ -110,17 +112,18 @@ export function EndCreditsSection() {
       style={{ '--container-height': `${containerHeight}px` } as React.CSSProperties}
     >
       <div className="end-credits-sticky-wrapper">
+        {/* Fading Background */}
+        <div className="end-credits-background" style={{ opacity: bgOpacity }} />
+        
         {/* Images */}
-        <div className="end-credits-image-container">
+        <div className="end-credits-image-container" style={{ opacity: bgOpacity }}>
           {storySections.map((section, index) => {
             const sectionStart = index * sectionHeight;
             const sectionEnd = (index + 1) * sectionHeight;
             const progressInSection = (scrollY - sectionStart) / sectionHeight;
             
             let opacity = 0;
-            // The image for a section should be visible only when scrolling through that section.
             if (scrollY >= sectionStart && scrollY < sectionEnd) {
-              // Fade in for the first 30% of the section, stable, then fade out for the last 30%.
               if (progressInSection < 0.3) {
                 opacity = progressInSection / 0.3;
               } else if (progressInSection > 0.7) {
@@ -131,7 +134,7 @@ export function EndCreditsSection() {
             }
             opacity = Math.max(0, Math.min(1, opacity));
 
-            const yOffset = (progressInSection - 0.5) * -40; // Parallax drift effect
+            const yOffset = (progressInSection - 0.5) * -40;
 
             return (
               <Image
@@ -155,18 +158,21 @@ export function EndCreditsSection() {
         {/* Text Scroller */}
         <div 
             className="end-credits-text-scroller font-headline"
-            style={{ '--text-scroll-y': `${textScrollY}px` } as React.CSSProperties}
+            style={{ 
+              '--text-scroll-y': `${textScrollY}px`,
+              opacity: bgOpacity,
+            } as React.CSSProperties}
         >
             {storySections.map((section, index) => {
                 const opacity = currentSectionIndex === index ? 1 : 
-                                index < currentSectionIndex ? 0.3 : // Fade out past sections
-                                0.5; // Hint at upcoming sections
+                                index < currentSectionIndex ? 0.3 : 
+                                0.5;
 
                 return (
                     <div 
                         key={index} 
                         className="end-credits-text" 
-                        style={{'--section-height': `${sectionHeight}px`} as React.CSSProperties}
+                        style={{'--section-height': `${sectionHeight}px`, display: 'flex', alignItems: 'center', justifyContent: 'center'} as React.CSSProperties}
                     >
                         <p style={{ opacity: opacity }}>{section.text}</p>
                     </div>

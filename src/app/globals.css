@@ -96,7 +96,7 @@
 
   /* End Credits Section Styles */
   .end-credits-container {
-    @apply relative bg-black text-white;
+    @apply relative;
     height: var(--container-height, 500vh);
   }
 
@@ -104,8 +104,12 @@
     @apply sticky top-0 h-screen overflow-hidden;
   }
 
+  .end-credits-background {
+    @apply absolute inset-0 bg-black;
+  }
+
   .end-credits-text-scroller {
-    @apply absolute inset-0 flex flex-col justify-start items-center;
+    @apply absolute inset-0 flex flex-col justify-start items-center text-white;
     transform: translateY(var(--text-scroll-y, 100vh));
   }
   
@@ -123,6 +127,6 @@
   }
 
   .end-credits-logo {
-    @apply absolute inset-0 flex items-center justify-center transition-opacity duration-1000 text-6xl font-bold font-headline;
+    @apply absolute inset-0 flex items-center justify-center transition-opacity duration-1000 text-6xl font-bold font-headline text-white;
   }
 }
