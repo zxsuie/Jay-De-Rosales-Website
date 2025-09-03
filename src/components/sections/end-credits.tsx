@@ -125,6 +125,14 @@ export function EndCreditsSection() {
     bgOpacity = Math.min(1, (scrollY - bgFadeStart) / (bgFadeEnd - bgFadeStart));
   }
 
+  const whiteBgFadeStart = containerHeight - viewportHeight * 2;
+  const whiteBgFadeEnd = containerHeight - viewportHeight;
+  let whiteBgOpacity = 0;
+  if (scrollY > whiteBgFadeStart) {
+    whiteBgOpacity = Math.min(1, (scrollY - whiteBgFadeStart) / (whiteBgFadeEnd - whiteBgFadeStart));
+  }
+
+
   const currentSection = storySections[activeScene];
 
   return (
@@ -135,6 +143,7 @@ export function EndCreditsSection() {
     >
       <div className="end-credits-sticky-wrapper">
         <div className="end-credits-background" style={{ opacity: bgOpacity }} />
+        <div className="end-credits-background-white" style={{ opacity: whiteBgOpacity }} />
         
         <div className="end-credits-content-wrapper font-headline">
           <div className="end-credits-text-container">
@@ -186,7 +195,7 @@ export function EndCreditsSection() {
 
         <div 
             className="end-credits-logo"
-            style={{ opacity: logoOpacity }}
+            style={{ opacity: logoOpacity, mixBlendMode: 'difference' }}
         >
             JDR
         </div>

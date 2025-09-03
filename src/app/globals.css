@@ -107,6 +107,10 @@
     @apply absolute inset-0 bg-black;
   }
 
+  .end-credits-background-white {
+    @apply absolute inset-0 bg-white;
+  }
+
   .end-credits-content-wrapper {
     @apply absolute inset-0 flex flex-col justify-center items-center text-white;
   }
