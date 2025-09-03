@@ -88,9 +88,6 @@ const VideoCard = ({ video, onClick }: { video: typeof videos[0], onClick: () =>
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
           <PlayCircle className="h-20 w-20 text-white/70 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
         </div>
-        <div className="absolute bottom-0 left-0 p-4">
-          <h3 className="text-lg font-bold text-white shadow-lg">{video.title}</h3>
-        </div>
       </div>
   );
 };
