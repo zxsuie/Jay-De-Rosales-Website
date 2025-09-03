@@ -24,12 +24,12 @@ export function Header() {
     }
   }, [isMenuOpen]);
 
-  const textClasses = "text-white text-stroke text-shadow-md";
+  const textClasses = "text-white";
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="w-full">
+        <div className="w-full mix-blend-difference">
           <div className="flex items-center justify-between">
               <Link 
                 href="/" 
