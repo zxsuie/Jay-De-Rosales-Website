@@ -94,3 +94,40 @@
     transform-style: preserve-3d;
   }
 }
+
+/* Approach Section Styles */
+#approach {
+  --story-height: 600vh; /* Total scrollable height */
+  height: var(--story-height);
+}
+
+.approach-sticky-container {
+  @apply sticky top-0 h-screen w-full overflow-hidden;
+}
+
+.approach-content-wrapper {
+  @apply absolute inset-0;
+}
+
+.approach-image-container,
+.approach-text-container {
+  @apply absolute inset-0 flex items-center justify-center;
+}
+
+.approach-text-scroller {
+  @apply w-full h-full relative;
+}
+
+.approach-text {
+  @apply text-white text-center text-3xl md:text-5xl max-w-4xl mx-auto absolute w-full transition-opacity duration-500 ease-in-out;
+  /* Other styles will be applied via JS */
+}
+
+.approach-image {
+  @apply absolute rounded-lg shadow-2xl transition-all duration-700 ease-in-out;
+  /* Positioning and opacity will be set via JS */
+}
+
+.approach-logo {
+  @apply absolute z-20 transition-opacity duration-1000;
+}
