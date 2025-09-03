@@ -31,7 +31,7 @@ export function Header() {
       )}
     >
       <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8 text-white mix-blend-difference">
-        <Link href="/" className="text-lg font-bold font-headline tracking-wider">
+        <Link href="/" className="text-lg font-bold font-headline tracking-wider text-white">
           JDR
         </Link>
 
@@ -41,7 +41,7 @@ export function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium transition-colors relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-current after:scale-x-0 after:origin-center after:transition-transform hover:after:scale-x-100"
+              className="text-sm font-medium text-white transition-colors relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-current after:scale-x-0 after:origin-center after:transition-transform hover:after:scale-x-100"
             >
               {link.label}
             </a>
@@ -50,7 +50,7 @@ export function Header() {
 
         {/* Mobile Nav Trigger */}
         <div className="md:hidden">
-          <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(true)} className="hover:bg-white/10">
+          <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(true)} className="text-white hover:bg-white/10">
             <Menu className="h-6 w-6" />
           </Button>
         </div>
