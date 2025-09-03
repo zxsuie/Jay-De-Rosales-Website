@@ -1,5 +1,5 @@
 import type {Config} from 'tailwindcss';
-const plugin = require('tailwindcss/plugin');
+import plugin from 'tailwindcss/plugin';
 
 export default {
   darkMode: ['class'],
@@ -101,7 +101,7 @@ export default {
       },
       textShadow: {
         sm: '0 1px 2px var(--tw-shadow-color)',
-        DEFAULT: '0 2px 4px var(--tw-shadow-color)',
+        DEFAULT: '1px 1px 2px rgba(0,0,0,0.5)',
         md: '0 2px 8px var(--tw-shadow-color)',
         lg: '0 8px 16px var(--tw-shadow-color)',
       },
