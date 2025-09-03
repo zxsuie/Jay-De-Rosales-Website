@@ -9,10 +9,10 @@ import { cn } from "@/lib/utils";
 
 const projects = [
     { 
-        title: "Business Seminars", 
-        description: "Teaching entrepreneurs in the Philippines to start again stronger.",
-        imageUrl: "https://picsum.photos/600/400?random=1",
-        dataAiHint: "business seminar audience"
+        title: "Advertising Agency", 
+        description: "Crafting brand stories that resonate and drive growth.",
+        imageUrl: "https://picsum.photos/600/400?random=5",
+        dataAiHint: "creative agency meeting"
     },
     { 
         title: "Authored Book", 
