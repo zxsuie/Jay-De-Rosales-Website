@@ -138,7 +138,7 @@ export function EndCreditsSection() {
         
         <div className="end-credits-content-wrapper font-headline">
           <div className="end-credits-text-container">
-            <div className="w-full max-w-5xl text-center px-4 sm:px-6 md:px-8">
+            <div className="w-[90%] max-w-2xl text-center">
                 {currentSection && (
                     <LetterReveal 
                         text={currentSection.text}
