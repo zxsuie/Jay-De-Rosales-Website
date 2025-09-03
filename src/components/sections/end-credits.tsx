@@ -150,7 +150,7 @@ export function EndCreditsSection() {
         <div className="end-credits-background" style={{ opacity: bgOpacity }} />
         <div className="end-credits-background-white" style={{ opacity: whiteBgOpacity }} />
         
-        <div className={cn("end-credits-content-wrapper font-headline", isFinalScene ? '' : 'text-white')}>
+        <div className={cn("end-credits-content-wrapper font-headline text-white")}>
           <div className="end-credits-text-container">
             <div className="mx-auto w-full max-w-[90%] md:max-w-[700px] text-center">
                 {currentSection && (
@@ -160,11 +160,14 @@ export function EndCreditsSection() {
                         progress={textProgress}
                         baseColor={"rgb(107 114 128)"}
                         revealColor={"rgb(255 255 255)"}
-                        finalColor={isFinalScene ? "rgb(0 0 0)" : undefined}
+                        fadeToBlackProgress={isFinalScene ? whiteBgOpacity : 0}
                         className={cn(isFinalScene && 'text-6xl')}
                     />
                     {isFinalScene && currentSection.subheading && (
-                       <p className={cn("mt-4 text-xl text-black/60 transition-opacity duration-1000", textProgress > 0.5 ? "opacity-100" : "opacity-0")}>
+                       <p 
+                        className={cn("mt-4 text-xl transition-opacity duration-1000", textProgress > 0.5 ? "opacity-100" : "opacity-0")}
+                        style={{ color: `rgb(${255 - 255 * whiteBgOpacity}, ${255 - 255 * whiteBgOpacity}, ${255 - 255 * whiteBgOpacity})` }}
+                       >
                          {currentSection.subheading}
                        </p>
                     )}

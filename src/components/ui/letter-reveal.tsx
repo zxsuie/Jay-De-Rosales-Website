@@ -1,3 +1,4 @@
+
 "use client";
 
 import { cn } from "@/lib/utils";
@@ -7,7 +8,7 @@ interface LetterRevealProps {
   progress: number;
   baseColor?: string;
   revealColor?: string;
-  finalColor?: string;
+  fadeToBlackProgress?: number;
   className?: string;
 }
 
@@ -16,11 +17,10 @@ export function LetterReveal({
   progress,
   baseColor = "rgb(156 163 175)", // gray-400
   revealColor = "rgb(255 255 255)", // white
-  finalColor,
+  fadeToBlackProgress = 0,
   className,
 }: LetterRevealProps) {
   const words = text.split(" ");
-  const isComplete = progress >= 1;
 
   return (
     <p className={cn("text-2xl md:text-4xl lg:text-5xl font-semibold leading-relaxed md:leading-relaxed", className)}>
@@ -34,18 +34,17 @@ export function LetterReveal({
             {word.split("").map((letter, j) => {
               const letterProgress = Math.max(0, Math.min(1, (wordProgress * word.length - j)));
               
-              let r, g, b;
+              const base = baseColor.match(/\d+/g)?.map(Number) || [0,0,0];
+              const reveal = revealColor.match(/\d+/g)?.map(Number) || [255,255,255];
+              
+              let r = base[0] + (reveal[0] - base[0]) * letterProgress;
+              let g = base[1] + (reveal[1] - base[1]) * letterProgress;
+              let b = base[2] + (reveal[2] - base[2]) * letterProgress;
 
-              if (isComplete && finalColor) {
-                  const final = finalColor.match(/\d+/g)?.map(Number) || [0,0,0];
-                  [r, g, b] = final;
-              } else {
-                  const base = baseColor.match(/\d+/g)?.map(Number) || [0,0,0];
-                  const reveal = revealColor.match(/\d+/g)?.map(Number) || [255,255,255];
-                  
-                  r = base[0] + (reveal[0] - base[0]) * letterProgress;
-                  g = base[1] + (reveal[1] - base[1]) * letterProgress;
-                  b = base[2] + (reveal[2] - base[2]) * letterProgress;
+              if (fadeToBlackProgress > 0) {
+                r = r * (1 - fadeToBlackProgress);
+                g = g * (1 - fadeToBlackProgress);
+                b = b * (1 - fadeToBlackProgress);
               }
               
               const color = `rgb(${r}, ${g}, ${b})`;
