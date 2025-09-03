@@ -61,8 +61,8 @@ export default function RootLayout({
       <body className={cn('font-body antialiased', 'bg-background text-foreground')}>
         <div className="fixed top-0 left-0 right-0 z-50 h-20 mix-blend-difference text-white">
             <div className="container mx-auto flex h-full items-center justify-between px-4 sm:px-6 lg:px-8">
-                <Link 
-                href="/" 
+                <Link
+                href="/"
                 className="text-lg font-bold font-headline tracking-wider"
                 >
                 JDR
@@ -83,10 +83,10 @@ export default function RootLayout({
 
                 {/* Mobile Nav Trigger */}
                 <div className="md:hidden">
-                <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    onClick={() => setIsMenuOpen(true)} 
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setIsMenuOpen(true)}
                     className="hover:bg-white/20"
                 >
                     <Menu className="h-6 w-6" />
