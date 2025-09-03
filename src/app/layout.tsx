@@ -54,46 +54,47 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&family=Sora:wght@700&display=swap"
           rel="stylesheet"
         />
       </head>
       <body className={cn('font-body antialiased', 'bg-background text-foreground')}>
-        <header className="fixed top-0 left-0 right-0 z-50 h-20">
-          <div className="container mx-auto flex h-full items-center justify-between px-4 sm:px-6 lg:px-8 text-white mix-blend-difference">
-            <Link 
-              href="/" 
-              className="text-lg font-bold font-headline tracking-wider"
-            >
-              JDR
-            </Link>
-
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center space-x-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm font-medium relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-current after:scale-x-0 after:origin-center after:transition-transform hover:after:scale-x-100"
+        <div className="fixed top-0 left-0 right-0 z-50 h-20 mix-blend-difference text-white">
+            <div className="container mx-auto flex h-full items-center justify-between px-4 sm:px-6 lg:px-8">
+                <Link 
+                href="/" 
+                className="text-lg font-bold font-headline tracking-wider"
                 >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
+                JDR
+                </Link>
 
-            {/* Mobile Nav Trigger */}
-            <div className="md:hidden">
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                onClick={() => setIsMenuOpen(true)} 
-                className="hover:bg-white/20"
-              >
-                <Menu className="h-6 w-6" />
-              </Button>
+                {/* Desktop Nav */}
+                <nav className="hidden md:flex items-center space-x-8">
+                {navLinks.map((link) => (
+                    <a
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm font-medium relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-current after:scale-x-0 after:origin-center after:transition-transform hover:after:scale-x-100"
+                    >
+                    {link.label}
+                    </a>
+                ))}
+                </nav>
+
+                {/* Mobile Nav Trigger */}
+                <div className="md:hidden">
+                <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    onClick={() => setIsMenuOpen(true)} 
+                    className="hover:bg-white/20"
+                >
+                    <Menu className="h-6 w-6" />
+                </Button>
+                </div>
             </div>
-          </div>
-        </header>
+        </div>
+        
 
         {/* Mobile Menu */}
         <div className={cn(
