@@ -12,25 +12,29 @@ const projects = [
         title: "Advertising Agency", 
         description: "Crafting brand stories that resonate and drive growth.",
         imageUrl: "/jdesignandadvertising.jpg",
-        dataAiHint: "creative agency meeting"
+        dataAiHint: "creative agency meeting",
+        url: "https://jdesignandadvertising.com/"
     },
     { 
         title: "Authored Book", 
         description: "Sharing lessons on failure, resilience, and growth.",
         imageUrl: "/authoredbook.jpg",
-        dataAiHint: "book cover"
+        dataAiHint: "book cover",
+        url: "https://www.facebook.com/Kidzcorp"
     },
     { 
         title: "Food Business Ventures", 
         description: "Practical experience in building sustainable local businesses.",
         imageUrl: "/JDFoods.jpg",
-        dataAiHint: "local cafe"
+        dataAiHint: "local cafe",
+        url: "https://jdfoods.shop/"
     },
     { 
         title: "Speaking Engagement", 
         description: "Inspiring audiences with talks on entrepreneurship and resilience.",
         imageUrl: "/Speaking Engagements.jpg",
-        dataAiHint: "public speaking"
+        dataAiHint: "public speaking",
+        url: "https://www.messenger.com/channel/jderosales"
     },
 ];
 
@@ -89,7 +93,9 @@ export function IndexSection() {
                             <li key={project.title}>
                                 <ScrollReveal delay={index * 100}>
                                     <a 
-                                        href="#" 
+                                        href={project.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="block group py-8 border-b border-foreground/10 last:border-b-0"
                                         onMouseEnter={(e) => handleMouseEnter(e, project.imageUrl, project.dataAiHint)}
                                         onMouseLeave={() => setActiveImage(null)}
