@@ -13,14 +13,6 @@ export function Contact() {
           </p>
         </ScrollReveal>
         
-        <ScrollReveal delay={200}>
-            <div className="mt-12 flex flex-col sm:flex-row justify-center items-center gap-x-8 gap-y-4 text-lg">
-                <a href="mailto:jay@jayderosales.com" className="hover:text-muted-foreground transition-colors relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-current after:scale-x-0 after:origin-center after:transition-transform hover:after:scale-x-100">
-                    jay@jayderosales.com
-                </a>
-            </div>
-        </ScrollReveal>
-        
         <ScrollReveal delay={300}>
             <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button asChild size="lg">
