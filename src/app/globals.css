@@ -93,4 +93,36 @@
   .preserve-3d {
     transform-style: preserve-3d;
   }
+
+  /* End Credits Section Styles */
+  .end-credits-container {
+    @apply relative bg-black text-white;
+    height: var(--container-height, 500vh);
+  }
+
+  .end-credits-sticky-wrapper {
+    @apply sticky top-0 h-screen overflow-hidden;
+  }
+
+  .end-credits-text-scroller {
+    @apply absolute inset-0 flex flex-col justify-start items-center;
+    transform: translateY(var(--text-scroll-y, 100vh));
+  }
+  
+  .end-credits-text {
+    @apply w-full max-w-3xl text-center text-4xl font-semibold leading-relaxed transition-opacity duration-500 p-8;
+    height: var(--section-height, 100vh);
+  }
+
+  .end-credits-image-container {
+    @apply absolute inset-0 pointer-events-none;
+  }
+
+  .end-credits-image {
+    @apply absolute w-[300px] h-auto rounded-lg shadow-2xl transition-all duration-700 ease-out;
+  }
+
+  .end-credits-logo {
+    @apply absolute inset-0 flex items-center justify-center transition-opacity duration-1000 text-6xl font-bold font-headline;
+  }
 }
