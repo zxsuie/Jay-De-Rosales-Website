@@ -18,7 +18,7 @@ const videos = [
   },
   {
     id: 2,
-    youtubeId: "Q8TXgCzxEnw", // placeholder
+    youtubeId: "h5oOIms7u40", 
     title: "Startup Coaching Success Story",
     dataAiHint: "coaching session"
   },
