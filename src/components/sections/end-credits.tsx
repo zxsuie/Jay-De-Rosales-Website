@@ -41,6 +41,7 @@ const storySections = [
 export function EndCreditsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeSection, setActiveSection] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,6 +56,10 @@ export function EndCreditsSection() {
       currentSection = Math.max(0, Math.min(numSections - 1, currentSection));
       
       setActiveSection(currentSection);
+
+      const scrollerHeight = height - window.innerHeight;
+      const progress = Math.max(0, Math.min(1, -top / scrollerHeight));
+      setScrollProgress(progress);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -65,15 +70,7 @@ export function EndCreditsSection() {
     };
   }, []);
 
-  const getScrollProgress = () => {
-    if (typeof window === 'undefined' || !containerRef.current) return 0;
-    const { top, height } = containerRef.current.getBoundingClientRect();
-    const scrollerHeight = height - window.innerHeight;
-    const progress = Math.max(0, Math.min(1, -top / scrollerHeight));
-    return progress;
-  };
-
-  const textTransform = `translateY(${50 - getScrollProgress() * 100}vh)`;
+  const textTransform = `translateY(${100 - scrollProgress * 100}vh)`;
 
   return (
     <section id="end-credits" className="relative bg-black text-white end-credits-container" ref={containerRef}>
@@ -109,7 +106,7 @@ export function EndCreditsSection() {
 
         {/* Text Layer */}
         <div className="end-credits-text-wrapper">
-          <div className="end-credits-text-scroller" style={{ transform: textTransform }}>
+          <div className="end-credits-text-scroller" style={{ transform: textTransform, paddingTop: '100vh' }}>
             {storySections.map((section, index) => (
               <div
                 key={`txt-${index}`}
@@ -128,7 +125,7 @@ export function EndCreditsSection() {
         {/* Logo Overlay */}
         <div className={cn(
           "absolute inset-0 flex items-center justify-center bg-black transition-opacity duration-1000 z-20",
-          activeSection === storySections.length - 1 && getScrollProgress() > 0.98 ? "opacity-100" : "opacity-0 pointer-events-none"
+          activeSection === storySections.length - 1 && scrollProgress > 0.98 ? "opacity-100" : "opacity-0 pointer-events-none"
         )}>
           <p className="text-5xl font-bold font-headline">JDR</p>
         </div>

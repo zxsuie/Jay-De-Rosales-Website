@@ -95,7 +95,7 @@
   }
 
   .end-credits-container {
-    height: 600vh;
+    height: 600vh; /* Determines the scroll length */
   }
 
   .end-credits-sticky-container {
@@ -113,27 +113,28 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align to the top */
+    align-items: flex-start; /* Aligns the start of the scroller to the top */
     color: white;
     z-index: 10;
-    perspective: 500px;
+    perspective: 500px; /* Adds perspective to child elements */
   }
 
   .end-credits-text-scroller {
     width: 100%;
-    max-width: 48rem; /* 768px */
+    max-width: 48rem; /* Equivalent to max-w-3xl */
     transform-style: preserve-3d;
+    /* The transform is applied via inline styles in the component */
   }
 
   .end-credits-text-block, .end-credits-image-block {
     opacity: 0;
     transition: opacity 0.5s ease-out;
   }
-
+  
   .end-credits-text-block.is-visible, .end-credits-image-block.is-visible {
     opacity: 1;
   }
-  
+
   .end-credits-image-container {
     position: absolute;
     top: 0;
@@ -142,7 +143,7 @@
     height: 100vh;
     z-index: 5;
   }
-
+  
   .end-credits-image-block {
     position: absolute;
     transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
