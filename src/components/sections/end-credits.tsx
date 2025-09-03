@@ -111,7 +111,7 @@ export function EndCreditsSection() {
   const scrollInScene = scrollY % sceneHeight;
   const progressInScene = sceneHeight > 0 ? scrollInScene / sceneHeight : 0;
 
-  const textProgress = Math.max(0, Math.min(1, progressInScene * 3)); // Animate text in first third
+  const textProgress = Math.max(0, Math.min(1, progressInScene * 2)); // Animate text in first half. Reduced from 3 to 2 to slow it down.
   
   const imageFadeDuration = 1 / (storySections[0].images.length + 1);
   
