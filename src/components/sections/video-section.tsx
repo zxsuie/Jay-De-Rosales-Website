@@ -2,49 +2,50 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import useEmblaCarousel, { type EmblaCarouselType } from 'embla-carousel-react';
+import useEmblaCarousel from 'embla-carousel-react';
 import Image from "next/image";
 import { PlayCircle, ArrowLeft, ArrowRight } from "lucide-react";
 import { ScrollReveal } from "../ui/scroll-reveal";
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const videos = [
   {
     id: 1,
-    thumbnailUrl: "https://picsum.photos/1280/720?random=1",
+    youtubeId: "DGvHIUZ94eE",
     title: "Speaking Engagement Highlights",
     dataAiHint: "public speaking event"
   },
   {
     id: 2,
-    thumbnailUrl: "https://picsum.photos/1280/720?random=2",
+    youtubeId: "Q8TXgCzxEnw", // placeholder
     title: "Startup Coaching Success Story",
     dataAiHint: "coaching session"
   },
   {
     id: 3,
-    thumbnailUrl: "https://picsum.photos/1280/720?random=3",
+    youtubeId: "Rp2-S_6n2AA", // placeholder
     title: "A Message on Resilience",
     dataAiHint: "motivational speech"
   },
     {
     id: 4,
-    thumbnailUrl: "https://picsum.photos/1280/720?random=4",
+    youtubeId: "L_LUpnjgPso", // placeholder
     title: "Business Fundamentals",
     dataAiHint: "business meeting"
   },
   {
     id: 5,
-    thumbnailUrl: "https://picsum.photos/1280/720?random=5",
+    youtubeId: "8S0FDjFBj8o", // placeholder
     title: "Leading with Empathy",
     dataAiHint: "team collaboration"
   },
 ];
 
-const VideoCard = ({ video }: { video: typeof videos[0] }) => {
+const VideoCard = ({ video, onClick }: { video: typeof videos[0], onClick: () => void }) => {
   const [transform, setTransform] = useState("perspective(1000px) rotateY(0deg) rotateX(0deg)");
   const ref = useRef<HTMLDivElement>(null);
+  const thumbnailUrl = `https://i.ytimg.com/vi/${video.youtubeId}/hqdefault.jpg`;
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -73,11 +74,12 @@ const VideoCard = ({ video }: { video: typeof videos[0] }) => {
   return (
     <div 
         ref={ref}
-        className="relative aspect-video overflow-hidden rounded-lg group w-full h-full shadow-lg"
+        className="relative aspect-video overflow-hidden rounded-lg group w-full h-full shadow-lg cursor-pointer"
         style={{ transform: transform, transition: 'transform 0.2s ease-out', willChange: 'transform' }}
+        onClick={onClick}
       >
         <Image
-          src={video.thumbnailUrl}
+          src={thumbnailUrl}
           alt={video.title}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -102,6 +104,7 @@ export function VideoSection() {
   });
 
   const [scale, setScale] = useState<(number | undefined)[]>([]);
+  const [selectedVideo, setSelectedVideo] = useState<(typeof videos[0] | null)>(null);
 
   const onScroll = useCallback(() => {
     if (!emblaApi) return;
@@ -172,7 +175,7 @@ export function VideoSection() {
                             transition: 'transform 0.3s ease-out, opacity 0.3s ease-out'
                         }}
                       >
-                        <VideoCard video={video} />
+                        <VideoCard video={video} onClick={() => setSelectedVideo(video)} />
                       </div>
                     </div>
                   ))}
@@ -199,6 +202,26 @@ export function VideoSection() {
             </div>
         </div>
       </div>
+      <Dialog open={!!selectedVideo} onOpenChange={(isOpen) => !isOpen && setSelectedVideo(null)}>
+        <DialogContent className="max-w-4xl p-0 border-0">
+          {selectedVideo && (
+            <>
+              <DialogHeader className="p-4 pb-0">
+                <DialogTitle>{selectedVideo.title}</DialogTitle>
+              </DialogHeader>
+              <div className="aspect-video">
+                <iframe
+                  className="w-full h-full"
+                  src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}?autoplay=1`}
+                  title={selectedVideo.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
