@@ -105,7 +105,9 @@ export function EndCreditsSection() {
     return <div style={{ height: `${storySections.length * SCENE_DURATION_MULTIPLIER * 100}vh` }} />;
   }
   
-  const activeScene = Math.min(storySections.length - 1, Math.floor(scrollY / sceneHeight));
+  let activeScene = Math.floor(scrollY / sceneHeight);
+  activeScene = Math.max(0, Math.min(storySections.length - 1, activeScene));
+
   const scrollInScene = scrollY % sceneHeight;
   const progressInScene = scrollInScene / sceneHeight;
 
@@ -134,7 +136,7 @@ export function EndCreditsSection() {
         
         <div className="end-credits-content-wrapper font-headline">
           <div className="end-credits-text-container">
-            <div className="w-full max-w-4xl text-center p-8">
+            <div className="w-full max-w-4xl text-center px-4 md:px-8">
                 <LetterReveal 
                     text={storySections[activeScene].text}
                     progress={textProgress}
