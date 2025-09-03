@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { LetterReveal } from '@/components/ui/letter-reveal';
+import { ScrollReveal } from '@/components/ui/scroll-reveal';
 
 const storySections = [
   {
@@ -57,6 +58,7 @@ const storySections = [
   },
   {
     text: "Jay De Rosales",
+    subheading: "CEO of JD Foods",
     images: []
   }
 ];
@@ -136,6 +138,7 @@ export function EndCreditsSection() {
 
 
   const currentSection = storySections[activeScene];
+  const isFinalScene = activeScene === storySections.length - 1;
 
   return (
     <section 
@@ -147,17 +150,24 @@ export function EndCreditsSection() {
         <div className="end-credits-background" style={{ opacity: bgOpacity }} />
         <div className="end-credits-background-white" style={{ opacity: whiteBgOpacity }} />
         
-        <div className="end-credits-content-wrapper font-headline">
+        <div className={cn("end-credits-content-wrapper font-headline", isFinalScene ? 'text-black' : 'text-white')}>
           <div className="end-credits-text-container">
             <div className="mx-auto w-full max-w-[90%] md:max-w-[700px] text-center">
                 {currentSection && (
+                  <div>
                     <LetterReveal 
                         text={currentSection.text}
                         progress={textProgress}
-                        baseColor="rgb(107 114 128)" // gray-500
-                        revealColor="rgb(255 255 255)" // white
-                        className={cn(activeScene === storySections.length - 1 && 'text-6xl')}
+                        baseColor={isFinalScene ? "rgb(255 255 255)" : "rgb(107 114 128)"}
+                        revealColor={isFinalScene ? "rgb(0 0 0)" : "rgb(255 255 255)"}
+                        className={cn(isFinalScene && 'text-6xl')}
                     />
+                    {isFinalScene && currentSection.subheading && (
+                       <p className={cn("mt-4 text-xl text-muted-foreground transition-opacity duration-1000", textProgress > 0.5 ? "opacity-100" : "opacity-0")}>
+                         {currentSection.subheading}
+                       </p>
+                    )}
+                  </div>
                 )}
             </div>
           </div>
@@ -199,5 +209,3 @@ export function EndCreditsSection() {
     </section>
   );
 }
-
-    
