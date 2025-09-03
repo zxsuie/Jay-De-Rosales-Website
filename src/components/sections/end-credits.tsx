@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
@@ -53,6 +54,10 @@ const storySections = [
         { src: "https://picsum.photos/300/400?random=17", dataAiHint: "sunrise mountains", position: { top: '10%', left: '25%', transform: 'rotate(-4deg)' } },
         { src: "https://picsum.photos/400/300?random=18", dataAiHint: "galaxy starfield", position: { top: '65%', left: '75%', transform: 'rotate(3deg)' } },
     ]
+  },
+  {
+    text: "Jay De Rosales",
+    images: []
   }
 ];
 
@@ -111,12 +116,9 @@ export function EndCreditsSection() {
   const scrollInScene = scrollY % sceneHeight;
   const progressInScene = sceneHeight > 0 ? scrollInScene / sceneHeight : 0;
 
-  const textProgress = Math.max(0, Math.min(1, progressInScene * 2)); // Animate text in first half. Reduced from 3 to 2 to slow it down.
+  const textProgress = Math.max(0, Math.min(1, progressInScene * 2));
   
-  const imageFadeDuration = 1 / (storySections[0].images.length + 1);
-  
-  const endThreshold = containerHeight - viewportHeight * 1.5;
-  const logoOpacity = scrollY > endThreshold ? Math.min(1, (scrollY - endThreshold) / (viewportHeight * 0.5)) : 0;
+  const imageFadeDuration = 1 / ((storySections[activeScene]?.images?.length ?? 0) + 1);
   
   const bgFadeStart = 0;
   const bgFadeEnd = viewportHeight / 2;
@@ -154,6 +156,7 @@ export function EndCreditsSection() {
                         progress={textProgress}
                         baseColor="rgb(107 114 128)" // gray-500
                         revealColor="rgb(255 255 255)" // white
+                        className={cn(activeScene === storySections.length - 1 && 'text-6xl')}
                     />
                 )}
             </div>
@@ -192,14 +195,9 @@ export function EndCreditsSection() {
             })}
           </div>
         </div>
-
-        <div 
-            className="end-credits-logo"
-            style={{ opacity: logoOpacity, mixBlendMode: 'difference' }}
-        >
-            JDR
-        </div>
       </div>
     </section>
   );
 }
+
+    
