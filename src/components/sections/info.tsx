@@ -1,3 +1,4 @@
+
 import { Separator } from "@/components/ui/separator";
 import { WordReveal } from "@/components/ui/word-reveal";
 import { Youtube } from "lucide-react";
@@ -40,7 +41,7 @@ export function Info() {
                 <a href="https://www.tiktok.com/@jayderosales" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
                     <TiktokIcon className="h-7 w-7" />
                 </a>
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                <a href="https://www.youtube.com/c/JayDeRosales" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
                     <Youtube className="h-8 w-8" />
                 </a>
             </div>
