@@ -63,7 +63,7 @@ const storySections = [
   }
 ];
 
-const SCENE_DURATION_MULTIPLIER = 6; // Adjust to control scroll length per scene
+const SCENE_DURATION_MULTIPLIER = 4; // Adjust to control scroll length per scene
 
 export function EndCreditsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
