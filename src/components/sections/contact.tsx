@@ -1,6 +1,30 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { Youtube } from "lucide-react";
+
+function TiktokIcon(props: React.ComponentProps<'svg'>) {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            {...props}
+        >
+            <path d="M16 8.5a4.5 4.5 0 0 1-9 0" />
+            <path d="M12 14.5v-6" />
+            <path d="M7.5 12a4.5 4.5 0 0 1 9 0" />
+            <path d="M19 6.5a1 1 0 0 0-1-1h-2.5" />
+            <path d="M5.5 15.5a1 1 0 0 0 1 1h2.5" />
+        </svg>
+    )
+}
 
 export function Contact() {
   return (
@@ -29,11 +53,11 @@ export function Contact() {
         </ScrollReveal>
         <ScrollReveal delay={300}>
           <div className="mt-12 flex justify-center gap-6">
-            <Link href="https://www.tiktok.com/@jayderosales" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              TikTok
+            <Link href="https://www.tiktok.com/@jayderosales" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+              <TiktokIcon className="h-7 w-7" />
             </Link>
-            <Link href="https://www.youtube.com/c/JayDeRosales" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              YouTube
+            <Link href="https://www.youtube.com/c/JayDeRosales" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Youtube className="h-8 w-8" />
             </Link>
           </div>
         </ScrollReveal>
