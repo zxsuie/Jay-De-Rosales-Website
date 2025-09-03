@@ -72,7 +72,7 @@ const VideoCard = ({ video }: { video: typeof videos[0] }) => {
   return (
     <div 
         ref={ref}
-        className="relative aspect-video overflow-hidden rounded-lg group w-full h-full shadow-2xl"
+        className="relative aspect-video overflow-hidden rounded-lg group w-full h-full shadow-lg"
         style={{ transform: transform, transition: 'transform 0.2s ease-out', willChange: 'transform' }}
       >
         <Image
