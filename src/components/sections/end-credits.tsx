@@ -134,7 +134,7 @@ export function EndCreditsSection() {
         
         <div className="end-credits-content-wrapper font-headline">
           <div className="end-credits-text-container">
-            <div className="w-full max-w-3xl text-center p-8">
+            <div className="w-full max-w-4xl text-center p-8">
                 <LetterReveal 
                     text={storySections[activeScene].text}
                     progress={textProgress}

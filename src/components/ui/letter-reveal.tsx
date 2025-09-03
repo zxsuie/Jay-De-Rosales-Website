@@ -20,7 +20,7 @@ export function LetterReveal({
   const letters = text.split("");
 
   return (
-    <p className={cn("text-4xl font-semibold leading-relaxed", className)}>
+    <p className={cn("text-4xl md:text-5xl font-semibold leading-relaxed", className)}>
       {letters.map((letter, i) => {
         const letterProgress = Math.max(0, Math.min(1, (progress * letters.length - i)));
         
