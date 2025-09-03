@@ -30,7 +30,7 @@ const videos = [
   },
     {
     id: 4,
-    youtubeId: "L_LUpnjgPso", // placeholder
+    youtubeId: "c5jOdSGLzCs",
     title: "Business Fundamentals",
     dataAiHint: "business meeting"
   },
