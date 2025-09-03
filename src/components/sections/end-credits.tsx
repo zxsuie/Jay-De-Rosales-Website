@@ -66,7 +66,7 @@ export function EndCreditsSection() {
       const numSections = storySections.length;
       const calculatedSectionHeight = viewportHeight; // Each section is one viewport high
       setSectionHeight(calculatedSectionHeight);
-      setContainerHeight(calculatedSectionHeight * numSections);
+      setContainerHeight(calculatedSectionHeight * (numSections + 1)); // Add extra space at the end
     }
   }, [viewportHeight]);
 
@@ -74,7 +74,9 @@ export function EndCreditsSection() {
     const handleScroll = () => {
       if (containerRef.current) {
         const { top } = containerRef.current.getBoundingClientRect();
-        setScrollY(-top);
+        // We want the scrollY to be 0 when the top of the container is at the top of the viewport
+        // and increase as we scroll down.
+        setScrollY(Math.max(0, -top));
       }
     };
 
@@ -85,12 +87,21 @@ export function EndCreditsSection() {
   }, []);
   
   if (viewportHeight === 0) {
-    return <div className="h-[500vh] bg-black" />;
+    // Return a placeholder with the estimated final height to prevent layout shifts
+    return <div className="h-[600vh] bg-black" />;
   }
 
-  const textScrollY = viewportHeight - (scrollY / (containerHeight - viewportHeight)) * (containerHeight + viewportHeight);
+  // Calculate the scrolling progress of the text itself.
+  // We want the text to scroll from bottom to top over the course of the container's scroll.
+  const textScrollTotal = storySections.length * sectionHeight;
+  const textScrollProgress = Math.max(0, scrollY - viewportHeight / 2) / (containerHeight - viewportHeight);
+  const textScrollY = viewportHeight - (textScrollProgress * textScrollTotal);
   
-  const currentSectionIndex = Math.floor(scrollY / sectionHeight);
+  const currentSectionIndex = Math.min(storySections.length - 1, Math.floor(scrollY / sectionHeight));
+
+  // Final logo fade-in logic
+  const endThreshold = containerHeight - viewportHeight * 1.5;
+  const logoOpacity = scrollY > endThreshold ? Math.min(1, (scrollY - endThreshold) / (viewportHeight * 0.5)) : 0;
 
   return (
     <section 
@@ -102,10 +113,14 @@ export function EndCreditsSection() {
         {/* Images */}
         <div className="end-credits-image-container">
           {storySections.map((section, index) => {
-            const progressInSection = (scrollY - (index * sectionHeight)) / sectionHeight;
+            const sectionStart = index * sectionHeight;
+            const sectionEnd = (index + 1) * sectionHeight;
+            const progressInSection = (scrollY - sectionStart) / sectionHeight;
+            
             let opacity = 0;
-            if (scrollY >= index * sectionHeight && scrollY < (index + 1) * sectionHeight) {
-              // Fade in for the first 30%, fade out for the last 30%
+            // The image for a section should be visible only when scrolling through that section.
+            if (scrollY >= sectionStart && scrollY < sectionEnd) {
+              // Fade in for the first 30% of the section, stable, then fade out for the last 30%.
               if (progressInSection < 0.3) {
                 opacity = progressInSection / 0.3;
               } else if (progressInSection > 0.7) {
@@ -116,7 +131,7 @@ export function EndCreditsSection() {
             }
             opacity = Math.max(0, Math.min(1, opacity));
 
-            const yOffset = (progressInSection - 0.5) * -50; // slight parallax drift
+            const yOffset = (progressInSection - 0.5) * -40; // Parallax drift effect
 
             return (
               <Image
@@ -130,21 +145,22 @@ export function EndCreditsSection() {
                 style={{
                   ...section.position,
                   opacity: opacity,
-                  transform: `${section.position.transform} translateY(${yOffset}px)`,
+                  transform: `${section.position.transform || ''} translateY(${yOffset}px)`,
                 }}
               />
             );
           })}
         </div>
         
-        {/* Text */}
+        {/* Text Scroller */}
         <div 
             className="end-credits-text-scroller font-headline"
             style={{ '--text-scroll-y': `${textScrollY}px` } as React.CSSProperties}
         >
             {storySections.map((section, index) => {
-                 const progressInSection = (scrollY - (index * sectionHeight)) / sectionHeight;
-                 const opacity = index === currentSectionIndex ? 1 : 0.5;
+                const opacity = currentSectionIndex === index ? 1 : 
+                                index < currentSectionIndex ? 0.3 : // Fade out past sections
+                                0.5; // Hint at upcoming sections
 
                 return (
                     <div 
@@ -158,12 +174,10 @@ export function EndCreditsSection() {
             })}
         </div>
 
-         {/* Logo Overlay */}
+         {/* Logo Overlay at the very end */}
         <div 
             className="end-credits-logo"
-            style={{ 
-                opacity: scrollY > containerHeight - viewportHeight * 1.5 ? 1 : 0
-            }}
+            style={{ opacity: logoOpacity }}
         >
             JDR
         </div>
