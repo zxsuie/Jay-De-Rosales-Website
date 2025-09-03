@@ -8,8 +8,7 @@ export function Footer() {
         <Separator className="my-8 bg-foreground/10" />
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 py-8 text-sm">
           <p>&copy; {new Date().getFullYear()} Jay De Rosales</p>
-          <p className="text-center">Empowering entrepreneurs with clarity, courage, and consistency.</p>
-          <Link href="/seo-optimizer" className="hover:text-foreground transition-colors">SEO Tool</Link>
+          <p className="text-center md:text-left">Empowering entrepreneurs with clarity, courage, and consistency.</p>
         </div>
       </div>
     </footer>
