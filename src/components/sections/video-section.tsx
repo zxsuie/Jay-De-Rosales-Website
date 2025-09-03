@@ -4,6 +4,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Image from "next/image";
+import Link from 'next/link';
 import { PlayCircle, ArrowLeft, ArrowRight } from "lucide-react";
 import { ScrollReveal } from "../ui/scroll-reveal";
 import { Button } from '@/components/ui/button';
@@ -144,7 +145,7 @@ export function VideoSection() {
   }, [emblaApi]);
 
   return (
-    <section id="videos" className="min-h-screen flex flex-col items-center justify-center bg-secondary/30 py-24 sm:py-32">
+    <section id="videos" className="bg-secondary/30 py-24 sm:py-32">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
             <ScrollReveal>
@@ -179,12 +180,12 @@ export function VideoSection() {
                 </div>
               </div>
             </ScrollReveal>
-            <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full px-0 sm:px-2 md:px-4 left-0 right-0">
+            <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full px-0 sm:px-2 md:px-4 left-0 right-0 pointer-events-none">
               <Button
                 onClick={scrollPrev}
                 variant="ghost"
                 size="icon"
-                className="h-12 w-12 rounded-full bg-background/60 hover:bg-background/90 shadow-lg"
+                className="h-12 w-12 rounded-full bg-background/60 hover:bg-background/90 shadow-lg pointer-events-auto"
               >
                 <ArrowLeft className="h-6 w-6" />
               </Button>
@@ -192,12 +193,26 @@ export function VideoSection() {
                 onClick={scrollNext}
                 variant="ghost"
                 size="icon"
-                className="h-12 w-12 rounded-full bg-background/60 hover:bg-background/90 shadow-lg"
+                className="h-12 w-12 rounded-full bg-background/60 hover:bg-background/90 shadow-lg pointer-events-auto"
               >
                 <ArrowRight className="h-6 w-6" />
               </Button>
             </div>
         </div>
+        <ScrollReveal delay={300}>
+            <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button asChild size="lg">
+                    <Link href="https://www.messenger.com/channel/jderosales" target="_blank" rel="noopener noreferrer">
+                        Join our Business Community
+                    </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                    <Link href="https://form.jotform.com/saucequotation/intensive-business-seminar" target="_blank" rel="noopener noreferrer">
+                        Join Our Business Seminar
+                    </Link>
+                </Button>
+            </div>
+        </ScrollReveal>
       </div>
       <Dialog open={!!selectedVideo} onOpenChange={(isOpen) => !isOpen && setSelectedVideo(null)}>
         <DialogContent className="max-w-4xl p-0 border-0">
