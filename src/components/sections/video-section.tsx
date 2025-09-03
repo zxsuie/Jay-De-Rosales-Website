@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { PlayCircle, ArrowLeft, ArrowRight } from "lucide-react";
 import { ScrollReveal } from "../ui/scroll-reveal";
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 const videos = [
   {
@@ -217,20 +217,15 @@ export function VideoSection() {
       <Dialog open={!!selectedVideo} onOpenChange={(isOpen) => !isOpen && setSelectedVideo(null)}>
         <DialogContent className="max-w-4xl p-0 border-0">
           {selectedVideo && (
-            <>
-              <DialogHeader className="p-4 pb-0">
-                <DialogTitle>{selectedVideo.title}</DialogTitle>
-              </DialogHeader>
-              <div className="aspect-video">
-                <iframe
-                  className="w-full h-full"
-                  src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}?autoplay=1`}
-                  title={selectedVideo.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            </>
+            <div className="aspect-video">
+              <iframe
+                className="w-full h-full"
+                src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}?autoplay=1`}
+                title={selectedVideo.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
           )}
         </DialogContent>
       </Dialog>
