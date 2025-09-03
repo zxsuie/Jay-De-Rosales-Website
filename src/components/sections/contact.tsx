@@ -13,7 +13,7 @@ export function Contact() {
           </p>
         </ScrollReveal>
         
-        <ScrollReveal delay={300}>
+        <ScrollReveal delay={200}>
             <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button asChild size="lg">
                     <Link href="https://www.messenger.com/channel/jderosales" target="_blank" rel="noopener noreferrer">
@@ -26,6 +26,16 @@ export function Contact() {
                     </Link>
                 </Button>
             </div>
+        </ScrollReveal>
+        <ScrollReveal delay={300}>
+          <div className="mt-12 flex justify-center gap-6">
+            <Link href="https://www.tiktok.com/@jayderosales" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              TikTok
+            </Link>
+            <Link href="https://www.youtube.com/c/JayDeRosales" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              YouTube
+            </Link>
+          </div>
         </ScrollReveal>
       </div>
     </section>
