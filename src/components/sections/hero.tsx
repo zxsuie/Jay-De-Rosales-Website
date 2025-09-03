@@ -26,7 +26,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative flex items-center justify-center min-h-screen text-center px-4 overflow-hidden">
+    <section className="relative flex items-end justify-center min-h-screen text-center px-4 overflow-hidden pb-20">
         {/* The image is positioned absolutely to act as a background layer */}
         <div
             className="absolute z-0 animate-fade-in"
@@ -54,7 +54,7 @@ export function Hero() {
         
         {/* The heading is layered on top with a mix-blend-difference to invert colors */}
         <div
-            className="relative z-10 animate-fade-in w-full mix-blend-difference text-white mt-12 translate-y-4"
+            className="relative z-10 animate-fade-in w-full mix-blend-difference text-white"
             style={{ animationDelay: '500ms', opacity: 0, animationFillMode: 'forwards' }}
         >
             <h1 className="text-8xl md:text-[10rem] lg:text-[14rem] font-bold font-headline leading-none">
