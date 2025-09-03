@@ -17,29 +17,35 @@ export function LetterReveal({
   revealColor = "rgb(255 255 255)", // white
   className,
 }: LetterRevealProps) {
-  const letters = text.split("");
+  const words = text.split(" ");
 
   return (
-    <p className={cn("text-2xl md:text-4xl font-semibold leading-relaxed md:leading-relaxed", className)}>
-      {letters.map((letter, i) => {
-        const letterProgress = Math.max(0, Math.min(1, (progress * letters.length - i)));
-        
-        // Simple linear interpolation for color
-        const base = baseColor.match(/\d+/g)?.map(Number) || [0,0,0];
-        const reveal = revealColor.match(/\d+/g)?.map(Number) || [255,255,255];
-        
-        const r = base[0] + (reveal[0] - base[0]) * letterProgress;
-        const g = base[1] + (reveal[1] - base[1]) * letterProgress;
-        const b = base[2] + (reveal[2] - base[2]) * letterProgress;
-        
-        const color = `rgb(${r}, ${g}, ${b})`;
+    <p className={cn("text-2xl md:text-4xl lg:text-5xl font-semibold leading-relaxed md:leading-relaxed", className)}>
+      {words.map((word, i) => {
+        const wordStart = i / words.length;
+        const wordEnd = (i + 1) / words.length;
+        const wordProgress = Math.max(0, Math.min(1, (progress - wordStart) / (wordEnd - wordStart)));
 
         return (
-          <span
-            key={i}
-            style={{ color }}
-          >
-            {letter === " " ? "\u00A0" : letter}
+          <span key={i} className="inline-block mr-3">
+            {word.split("").map((letter, j) => {
+              const letterProgress = Math.max(0, Math.min(1, (wordProgress * word.length - j)));
+              
+              const base = baseColor.match(/\d+/g)?.map(Number) || [0,0,0];
+              const reveal = revealColor.match(/\d+/g)?.map(Number) || [255,255,255];
+              
+              const r = base[0] + (reveal[0] - base[0]) * letterProgress;
+              const g = base[1] + (reveal[1] - base[1]) * letterProgress;
+              const b = base[2] + (reveal[2] - base[2]) * letterProgress;
+              
+              const color = `rgb(${r}, ${g}, ${b})`;
+
+              return (
+                <span key={j} style={{ color }}>
+                  {letter}
+                </span>
+              );
+            })}
           </span>
         );
       })}
