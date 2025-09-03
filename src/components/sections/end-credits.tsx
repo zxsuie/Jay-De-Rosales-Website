@@ -149,6 +149,7 @@ export function EndCreditsSection() {
       <div className="end-credits-sticky-wrapper">
         <div className="end-credits-background" style={{ opacity: bgOpacity }} />
         <div className="end-credits-background-white" style={{ opacity: whiteBgOpacity }} />
+        <div className="noise-overlay" />
         
         <div className={cn("end-credits-content-wrapper font-headline text-white")}>
           <div className="end-credits-text-container">
