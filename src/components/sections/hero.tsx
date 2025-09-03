@@ -38,7 +38,7 @@ export function Hero() {
             }}
         >
             <Image
-                src="https://picsum.photos/400/500"
+                src="/jayderosales.jpg"
                 alt="Jay De Rosales"
                 width={400}
                 height={500}

@@ -11,25 +11,25 @@ const projects = [
     { 
         title: "Advertising Agency", 
         description: "Crafting brand stories that resonate and drive growth.",
-        imageUrl: "https://picsum.photos/600/400?random=5",
+        imageUrl: "/jdesignandadvertising.jpg",
         dataAiHint: "creative agency meeting"
     },
     { 
         title: "Authored Book", 
         description: "Sharing lessons on failure, resilience, and growth.",
-        imageUrl: "https://picsum.photos/600/400?random=2",
+        imageUrl: "/authoredbook.jpg",
         dataAiHint: "book cover"
     },
     { 
         title: "Food Business Ventures", 
         description: "Practical experience in building sustainable local businesses.",
-        imageUrl: "https://picsum.photos/600/400?random=3",
+        imageUrl: "/JDFoods.jpg",
         dataAiHint: "local cafe"
     },
     { 
         title: "Speaking Engagement", 
         description: "Inspiring audiences with talks on entrepreneurship and resilience.",
-        imageUrl: "https://picsum.photos/600/400?random=4",
+        imageUrl: "/Speaking Engagements.jpg",
         dataAiHint: "public speaking"
     },
 ];

@@ -11,49 +11,49 @@ const storySections = [
   {
     text: "I believe in the capacity of a person to achieve great things.",
     images: [
-      { src: "https://picsum.photos/400/300?random=1", dataAiHint: "glowing horizon", position: { top: '65%', left: '70%', transform: 'rotate(5deg)' } },
-      { src: "https://picsum.photos/300/400?random=2", dataAiHint: "silhouette dreamer", position: { top: '10%', left: '15%', transform: 'rotate(-5deg)' } },
-      { src: "https://picsum.photos/400/300?random=3", dataAiHint: "sunrise", position: { top: '50%', left: '80%', transform: 'translate(-50%, -50%) rotate(3deg)' } },
+      { src: "/1.jpg", dataAiHint: "glowing horizon", position: { top: '65%', left: '70%', transform: 'rotate(5deg)' } },
+      { src: "/2.jpg", dataAiHint: "silhouette dreamer", position: { top: '10%', left: '15%', transform: 'rotate(-5deg)' } },
+      { src: "/3.jpg", dataAiHint: "sunrise", position: { top: '50%', left: '80%', transform: 'translate(-50%, -50%) rotate(3deg)' } },
     ]
   },
   {
     text: "As a husband, I’ve learned that true strength begins with love, commitment, and patience.",
     images: [
-      { src: "https://picsum.photos/300/400?random=4", dataAiHint: "wedding rings", position: { top: '15%', left: '75%', transform: 'rotate(4deg)' } },
-      { src: "https://picsum.photos/400/300?random=5", dataAiHint: "couple silhouette", position: { top: '70%', left: '10%', transform: 'rotate(-2deg)' } },
-      { src: "https://picsum.photos/400/300?random=6", dataAiHint: "home interior light", position: { top: '50%', left: '50%', transform: 'translate(-50%, -50%) scale(1.1)' } },
+      { src: "/4.jpg", dataAiHint: "wedding rings", position: { top: '15%', left: '75%', transform: 'rotate(4deg)' } },
+      { src: "/5.jpg", dataAiHint: "couple silhouette", position: { top: '70%', left: '10%', transform: 'rotate(-2deg)' } },
+      { src: "/6.jpg", dataAiHint: "home interior light", position: { top: '50%', left: '50%', transform: 'translate(-50%, -50%) scale(1.1)' } },
     ]
   },
   {
     text: "As a father, I believe in guiding with compassion, teaching with example, and dreaming with my children.",
     images: [
-        { src: "https://picsum.photos/400/300?random=7", dataAiHint: "child hand parent", position: { top: '55%', left: '80%', transform: 'rotate(2deg)' } },
-        { src: "https://picsum.photos/300/400?random=8", dataAiHint: "family walking sunset", position: { top: '20%', left: '20%', transform: 'rotate(-3deg)' } },
-        { src: "https://picsum.photos/400/300?random=9", dataAiHint: "father carrying child", position: { top: '70%', left: '50%', transform: 'translate(-50%, -50%)' } },
+        { src: "/7.jpg", dataAiHint: "child hand parent", position: { top: '55%', left: '80%', transform: 'rotate(2deg)' } },
+        { src: "/8.jpg", dataAiHint: "family walking sunset", position: { top: '20%', left: '20%', transform: 'rotate(-3deg)' } },
+        { src: "/9.jpg", dataAiHint: "father carrying child", position: { top: '70%', left: '50%', transform: 'translate(-50%, -50%)' } },
     ]
   },
   {
     text: "As a businessman, I understand the value of vision, execution, and resilience in building something greater than myself.",
     images: [
-        { src: "https://picsum.photos/400/300?random=10", dataAiHint: "laptop charts", position: { top: '60%', left: '15%', transform: 'rotate(-4deg)' } },
-        { src: "https://picsum.photos/300/400?random=11", dataAiHint: "boardroom table", position: { top: '15%', left: '70%', transform: 'rotate(3deg)' } },
-        { src: "https://picsum.photos/400/300?random=12", dataAiHint: "city skyline night", position: { top: '50%', left: '50%', transform: 'translate(-50%, -50%) scale(1.1)' } },
+        { src: "/10.jpg", dataAiHint: "laptop charts", position: { top: '60%', left: '15%', transform: 'rotate(-4deg)' } },
+        { src: "/11.jpg", dataAiHint: "boardroom table", position: { top: '15%', left: '70%', transform: 'rotate(3deg)' } },
+        { src: "/12.jpg", dataAiHint: "city skyline night", position: { top: '50%', left: '50%', transform: 'translate(-50%, -50%) scale(1.1)' } },
     ]
   },
   {
     text: "As a speaker, I share not just words, but stories that inspire and empower others to act.",
     images: [
-        { src: "https://picsum.photos/300/400?random=13", dataAiHint: "microphone close-up", position: { top: '25%', left: '80%', transform: 'rotate(5deg)' } },
-        { src: "https://picsum.photos/400/300?random=14", dataAiHint: "stage spotlight", position: { top: '70%', left: '20%', transform: 'rotate(-2deg)' } },
-        { src: "https://picsum.photos/400/300?random=15", dataAiHint: "audience silhouette", position: { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' } },
+        { src: "/13.jpg", dataAiHint: "microphone close-up", position: { top: '25%', left: '80%', transform: 'rotate(5deg)' } },
+        { src: "/14.jpg", dataAiHint: "stage spotlight", position: { top: '70%', left: '20%', transform: 'rotate(-2deg)' } },
+        { src: "/15.jpg", dataAiHint: "audience silhouette", position: { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' } },
     ]
   },
   {
     text: "Everything starts with a dream, a purpose and a goal, executed with a plan and worked out with a team. Pursued with unrelentless passion and grit. Everything is possible.",
     images: [
-        { src: "https://picsum.photos/400/300?random=16", dataAiHint: "rocket launch", position: { top: '50%', left: '50%', transform: 'translate(-50%, -50%) scale(1.2)' } },
-        { src: "https://picsum.photos/300/400?random=17", dataAiHint: "sunrise mountains", position: { top: '10%', left: '25%', transform: 'rotate(-4deg)' } },
-        { src: "https://picsum.photos/400/300?random=18", dataAiHint: "galaxy starfield", position: { top: '65%', left: '75%', transform: 'rotate(3deg)' } },
+        { src: "/2.jpg", dataAiHint: "rocket launch", position: { top: '50%', left: '50%', transform: 'translate(-50%, -50%) scale(1.2)' } },
+        { src: "/5.jpg", dataAiHint: "sunrise mountains", position: { top: '10%', left: '25%', transform: 'rotate(-4deg)' } },
+        { src: "/8.jpg", dataAiHint: "galaxy starfield", position: { top: '65%', left: '75%', transform: 'rotate(3deg)' } },
     ]
   },
   {
@@ -195,7 +195,7 @@ export function EndCreditsSection() {
                   key={`${activeScene}-${index}`}
                   src={image.src}
                   alt={image.dataAiHint}
-                  width={400}
+                  width={450}
                   height={300}
                   className="end-credits-image"
                   data-ai-hint={image.dataAiHint}
