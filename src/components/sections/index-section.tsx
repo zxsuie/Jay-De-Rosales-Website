@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -70,7 +71,7 @@ export function IndexSection() {
     };
 
     return (
-        <section id="index" className="py-24 sm:py-32 relative">
+        <section id="work" className="py-24 sm:py-32 relative">
             <div className="container mx-auto px-4">
                  <div className="text-center mb-16">
                     <ScrollReveal>
