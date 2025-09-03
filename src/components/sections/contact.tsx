@@ -18,11 +18,6 @@ export function Contact() {
                 <a href="mailto:jay@jayderosales.com" className="hover:text-muted-foreground transition-colors relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-current after:scale-x-0 after:origin-center after:transition-transform hover:after:scale-x-100">
                     jay@jayderosales.com
                 </a>
-                <div className="flex items-center gap-6 text-muted-foreground">
-                    <a href="#" className="hover:text-foreground transition-colors">LinkedIn</a>
-                    <a href="#" className="hover:text-foreground transition-colors">TikTok</a>
-                    <a href="#" className="hover:text-foreground transition-colors">YouTube</a>
-                </div>
             </div>
         </ScrollReveal>
         
