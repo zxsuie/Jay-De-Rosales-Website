@@ -158,8 +158,8 @@ export function EndCreditsSection() {
                     <LetterReveal 
                         text={currentSection.text}
                         progress={textProgress}
-                        baseColor={isFinalScene ? "rgb(255 255 255)" : "rgb(107 114 128)"}
-                        revealColor={isFinalScene ? "rgb(0 0 0)" : "rgb(255 255 255)"}
+                        baseColor={"rgb(107 114 128)"}
+                        revealColor={"rgb(255 255 255)"}
                         className={cn(isFinalScene && 'text-6xl')}
                     />
                     {isFinalScene && currentSection.subheading && (
