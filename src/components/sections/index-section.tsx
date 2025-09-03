@@ -26,10 +26,10 @@ const projects = [
         dataAiHint: "local cafe"
     },
     { 
-        title: "Digital Community", 
-        description: "Mentoring entrepreneurs through an online network of support.",
+        title: "Speaking Engagement", 
+        description: "Inspiring audiences with talks on entrepreneurship and resilience.",
         imageUrl: "https://picsum.photos/600/400?random=4",
-        dataAiHint: "online community"
+        dataAiHint: "public speaking"
     },
 ];
 
