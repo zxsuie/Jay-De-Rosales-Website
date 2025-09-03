@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export function Contact() {
@@ -21,6 +23,21 @@ export function Contact() {
                     <a href="#" className="hover:text-foreground transition-colors">TikTok</a>
                     <a href="#" className="hover:text-foreground transition-colors">YouTube</a>
                 </div>
+            </div>
+        </ScrollReveal>
+        
+        <ScrollReveal delay={300}>
+            <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button asChild size="lg">
+                    <Link href="https://www.messenger.com/channel/jderosales" target="_blank" rel="noopener noreferrer">
+                        Join our Business Community
+                    </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                    <Link href="https://form.jotform.com/saucequotation/intensive-business-seminar" target="_blank" rel="noopener noreferrer">
+                        Join Our Business Seminar
+                    </Link>
+                </Button>
             </div>
         </ScrollReveal>
       </div>
