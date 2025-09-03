@@ -5,7 +5,6 @@ import { Info } from '@/components/sections/info';
 import { IndexSection } from '@/components/sections/index-section';
 import { Contact } from '@/components/sections/contact';
 import { VideoSection } from '@/components/sections/video-section';
-import { ScrollyTelling } from '@/components/sections/scrolly-telling';
 
 export default function Home() {
   return (
@@ -16,7 +15,6 @@ export default function Home() {
         <Info />
         <VideoSection />
         <IndexSection />
-        <ScrollyTelling />
         <Contact />
       </div>
       <Footer />
