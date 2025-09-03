@@ -30,29 +30,31 @@ export function Header() {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent"
       )}
     >
-      <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8 text-white mix-blend-difference">
-        <Link href="/" className="text-lg font-bold font-headline tracking-wider text-white">
-          JDR
-        </Link>
+      <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between w-full mix-blend-difference">
+          <Link href="/" className="text-lg font-bold font-headline tracking-wider text-white">
+            JDR
+          </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-white transition-colors relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-current after:scale-x-0 after:origin-center after:transition-transform hover:after:scale-x-100"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-white transition-colors relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-current after:scale-x-0 after:origin-center after:transition-transform hover:after:scale-x-100"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
 
-        {/* Mobile Nav Trigger */}
-        <div className="md:hidden">
-          <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(true)} className="text-white hover:bg-white/10">
-            <Menu className="h-6 w-6" />
-          </Button>
+          {/* Mobile Nav Trigger */}
+          <div className="md:hidden">
+            <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(true)} className="text-white hover:bg-white/10">
+              <Menu className="h-6 w-6" />
+            </Button>
+          </div>
         </div>
       </div>
 
