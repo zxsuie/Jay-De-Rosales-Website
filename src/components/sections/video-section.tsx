@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from 'react';
@@ -143,47 +144,59 @@ export function VideoSection() {
   }, [emblaApi]);
 
   return (
-    <section id="videos" className="min-h-screen flex items-center justify-center bg-secondary/30">
-      <div className="container mx-auto px-4 relative">
-        <ScrollReveal delay={200}>
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex" style={{ backfaceVisibility: 'hidden' }}>
-              {videos.map((video, index) => (
-                <div 
-                  key={video.id} 
-                  className="flex-[0_0_80%] sm:flex-[0_0_70%] md:flex-[0_0_50%] lg:flex-[0_0_45%] min-w-0 pl-4 relative"
-                >
-                  <div
-                    style={{
-                        transform: `scale(${scale[index] ?? 0})`,
-                        opacity: scale[index],
-                        transition: 'transform 0.3s ease-out, opacity 0.3s ease-out'
-                    }}
-                  >
-                    <VideoCard video={video} />
-                  </div>
+    <section id="videos" className="min-h-screen flex flex-col items-center justify-center bg-secondary/30 py-24 sm:py-32">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+            <ScrollReveal>
+                <h2 className="text-4xl md:text-5xl font-bold font-headline">Insights in Motion</h2>
+            </ScrollReveal>
+            <ScrollReveal delay={150}>
+                <p className="mt-4 max-w-2xl mx-auto text-lg text-foreground/70">
+                    Explore keynotes, interviews, and stories on entrepreneurship, resilience, and leadership.
+                </p>
+            </ScrollReveal>
+        </div>
+        <div className="relative">
+            <ScrollReveal delay={200}>
+              <div className="overflow-hidden" ref={emblaRef}>
+                <div className="flex" style={{ backfaceVisibility: 'hidden' }}>
+                  {videos.map((video, index) => (
+                    <div 
+                      key={video.id} 
+                      className="flex-[0_0_80%] sm:flex-[0_0_70%] md:flex-[0_0_50%] lg:flex-[0_0_45%] min-w-0 pl-4 relative"
+                    >
+                      <div
+                        style={{
+                            transform: `scale(${scale[index] ?? 0})`,
+                            opacity: scale[index],
+                            transition: 'transform 0.3s ease-out, opacity 0.3s ease-out'
+                        }}
+                      >
+                        <VideoCard video={video} />
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+            </ScrollReveal>
+            <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full px-0 sm:px-2 md:px-4 left-0 right-0">
+              <Button
+                onClick={scrollPrev}
+                variant="ghost"
+                size="icon"
+                className="h-12 w-12 rounded-full bg-background/60 hover:bg-background/90 shadow-lg"
+              >
+                <ArrowLeft className="h-6 w-6" />
+              </Button>
+              <Button
+                onClick={scrollNext}
+                variant="ghost"
+                size="icon"
+                className="h-12 w-12 rounded-full bg-background/60 hover:bg-background/90 shadow-lg"
+              >
+                <ArrowRight className="h-6 w-6" />
+              </Button>
             </div>
-          </div>
-        </ScrollReveal>
-        <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full px-0 sm:px-2 md:px-4 left-0 right-0">
-          <Button
-            onClick={scrollPrev}
-            variant="ghost"
-            size="icon"
-            className="h-12 w-12 rounded-full bg-background/60 hover:bg-background/90 shadow-lg"
-          >
-            <ArrowLeft className="h-6 w-6" />
-          </Button>
-          <Button
-            onClick={scrollNext}
-            variant="ghost"
-            size="icon"
-            className="h-12 w-12 rounded-full bg-background/60 hover:bg-background/90 shadow-lg"
-          >
-            <ArrowRight className="h-6 w-6" />
-          </Button>
         </div>
       </div>
     </section>
