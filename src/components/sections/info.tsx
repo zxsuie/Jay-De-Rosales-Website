@@ -37,7 +37,7 @@ export function Info() {
           </div>
           <ScrollReveal delay={totalDelay} threshold={1.0}>
             <div className="mt-12 flex justify-center items-center gap-6">
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                <a href="https://www.tiktok.com/@jayderosales" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
                     <TiktokIcon className="h-7 w-7" />
                 </a>
                 <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
