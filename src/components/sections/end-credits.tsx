@@ -138,7 +138,7 @@ export function EndCreditsSection() {
         
         <div className="end-credits-content-wrapper font-headline">
           <div className="end-credits-text-container">
-            <div className="w-[90%] max-w-2xl text-center">
+            <div className="mx-auto w-full max-w-[90%] md:max-w-[700px] text-center">
                 {currentSection && (
                     <LetterReveal 
                         text={currentSection.text}
@@ -194,5 +194,3 @@ export function EndCreditsSection() {
     </section>
   );
 }
-
-    
