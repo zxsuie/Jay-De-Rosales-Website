@@ -24,7 +24,7 @@ const videos = [
   },
   {
     id: 3,
-    youtubeId: "Rp2-S_6n2AA", // placeholder
+    youtubeId: "j7LJ0LAXJZI",
     title: "A Message on Resilience",
     dataAiHint: "motivational speech"
   },
