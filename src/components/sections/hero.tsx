@@ -54,7 +54,7 @@ export function Hero() {
         
         {/* The heading is layered on top with a mix-blend-difference to invert colors */}
         <div
-            className="relative z-10 animate-fade-in w-full mix-blend-difference text-white"
+            className="relative z-10 animate-fade-in w-full mix-blend-difference text-white mt-12 translate-y-4"
             style={{ animationDelay: '500ms', opacity: 0, animationFillMode: 'forwards' }}
         >
             <h1 className="text-8xl md:text-[10rem] lg:text-[14rem] font-bold font-headline leading-none">
