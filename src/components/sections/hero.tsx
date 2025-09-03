@@ -59,7 +59,7 @@ export function Hero() {
                 className="absolute z-20 animate-fade-in w-full"
                 style={{ animationDelay: '500ms', opacity: 0, animationFillMode: 'forwards' }}
             >
-                <h1 className="text-8xl md:text-[10rem] lg:text-[14rem] font-bold font-headline leading-none mix-blend-difference text-white">
+                <h1 className="text-8xl md:text-[10rem] lg:text-[14rem] font-bold font-headline leading-none text-foreground">
                     <span className="block">Jay De</span>
                     <span className="block">Rosales</span>
                 </h1>
