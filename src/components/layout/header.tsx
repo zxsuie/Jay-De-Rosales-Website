@@ -15,6 +15,15 @@ const navLinks = [
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -24,45 +33,48 @@ export function Header() {
     }
   }, [isMenuOpen]);
 
-  const textClasses = "text-white";
+  const headerClasses = cn(
+    "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+    isScrolled ? "bg-background/80 backdrop-blur-sm shadow-md" : "bg-transparent"
+  );
+  
+  const textClasses = cn("transition-colors", isScrolled ? "text-foreground" : "text-white");
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header className={headerClasses}>
       <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="w-full mix-blend-difference">
-          <div className="flex items-center justify-between">
-              <Link 
-                href="/" 
-                className={cn("text-lg font-bold font-headline tracking-wider", textClasses)}
-              >
-                JDR
-              </Link>
+        <div className="flex items-center justify-between w-full">
+            <Link 
+              href="/" 
+              className={cn("text-lg font-bold font-headline tracking-wider", textClasses)}
+            >
+              JDR
+            </Link>
 
-              {/* Desktop Nav */}
-              <nav className="hidden md:flex items-center space-x-8">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className={cn("text-sm font-medium relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-current after:scale-x-0 after:origin-center after:transition-transform hover:after:scale-x-100", textClasses)}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </nav>
-
-              {/* Mobile Nav Trigger */}
-              <div className="md:hidden">
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  onClick={() => setIsMenuOpen(true)} 
-                  className={cn("hover:bg-black/10", textClasses)}
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex items-center space-x-8">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={cn("text-sm font-medium relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:w-full after:bg-current after:scale-x-0 after:origin-center after:transition-transform hover:after:scale-x-100", textClasses)}
                 >
-                  <Menu className="h-6 w-6" />
-                </Button>
-              </div>
-          </div>
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+
+            {/* Mobile Nav Trigger */}
+            <div className="md:hidden">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={() => setIsMenuOpen(true)} 
+                className={cn("hover:bg-foreground/10", textClasses)}
+              >
+                <Menu className="h-6 w-6" />
+              </Button>
+            </div>
         </div>
       </div>
 
