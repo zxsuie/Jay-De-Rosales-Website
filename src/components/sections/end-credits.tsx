@@ -101,7 +101,7 @@ export function EndCreditsSection() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  if (!isMounted || viewportHeight === 0) {
+  if (!isMounted || viewportHeight === 0 || sceneHeight === 0) {
     return <div style={{ height: `${storySections.length * SCENE_DURATION_MULTIPLIER * 100}vh` }} />;
   }
   
