@@ -26,7 +26,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative flex items-end justify-center min-h-screen text-center px-4 overflow-hidden pb-20">
+    <section className="relative flex items-center justify-center min-h-screen text-center px-4 overflow-hidden">
         {/* The image is positioned absolutely to act as a background layer */}
         <div
             className="absolute z-0 animate-fade-in"
@@ -52,15 +52,18 @@ export function Hero() {
             />
         </div>
         
-        {/* The heading is layered on top with a mix-blend-difference to invert colors */}
-        <div
-            className="relative z-10 animate-fade-in w-full mix-blend-difference text-white"
-            style={{ animationDelay: '500ms', opacity: 0, animationFillMode: 'forwards' }}
-        >
-            <h1 className="text-8xl md:text-[10rem] lg:text-[14rem] font-bold font-headline leading-none">
-                <span className="block">Jay De</span>
-                <span className="block">Rosales</span>
-            </h1>
+        {/* Wrapper to push text to the bottom */}
+        <div className="relative z-10 flex flex-col justify-end w-full h-screen pb-20">
+            {/* The heading is layered on top with a mix-blend-difference to invert colors */}
+            <div
+                className="animate-fade-in w-full mix-blend-difference text-white"
+                style={{ animationDelay: '500ms', opacity: 0, animationFillMode: 'forwards' }}
+            >
+                <h1 className="text-8xl md:text-[10rem] lg:text-[14rem] font-bold font-headline leading-none">
+                    <span className="block">Jay De</span>
+                    <span className="block">Rosales</span>
+                </h1>
+            </div>
         </div>
     </section>
   );
