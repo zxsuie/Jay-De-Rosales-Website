@@ -26,10 +26,10 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative flex items-center justify-center min-h-screen text-center px-4 overflow-hidden">
+    <section className="relative min-h-screen text-center px-4 overflow-hidden">
         {/* The image is positioned absolutely to act as a background layer */}
         <div
-            className="absolute z-0 animate-fade-in"
+            className="absolute inset-0 flex items-center justify-center animate-fade-in"
             style={{ 
                 animationDelay: '200ms', 
                 opacity: 0, 
@@ -44,8 +44,8 @@ export function Hero() {
                 height={500}
                 className="rounded-lg object-cover w-[250px] h-auto md:w-[400px] transition-transform duration-500 ease-out shadow-2xl"
                 style={{ 
-                transform: transform,
-                willChange: 'transform'
+                  transform: transform,
+                  willChange: 'transform'
                 }}
                 data-ai-hint="portrait man"
                 priority
