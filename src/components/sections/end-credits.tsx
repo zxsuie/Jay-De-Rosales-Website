@@ -105,11 +105,11 @@ export function EndCreditsSection() {
     return <div style={{ height: `${storySections.length * SCENE_DURATION_MULTIPLIER * 100}vh` }} />;
   }
   
-  let activeScene = Math.floor(scrollY / sceneHeight);
+  let activeScene = sceneHeight > 0 ? Math.floor(scrollY / sceneHeight) : 0;
   activeScene = Math.max(0, Math.min(storySections.length - 1, activeScene));
 
   const scrollInScene = scrollY % sceneHeight;
-  const progressInScene = scrollInScene / sceneHeight;
+  const progressInScene = sceneHeight > 0 ? scrollInScene / sceneHeight : 0;
 
   const textProgress = Math.max(0, Math.min(1, progressInScene * 3)); // Animate text in first third
   
@@ -125,6 +125,8 @@ export function EndCreditsSection() {
     bgOpacity = Math.min(1, (scrollY - bgFadeStart) / (bgFadeEnd - bgFadeStart));
   }
 
+  const currentSection = storySections[activeScene];
+
   return (
     <section 
       ref={containerRef} 
@@ -136,18 +138,20 @@ export function EndCreditsSection() {
         
         <div className="end-credits-content-wrapper font-headline">
           <div className="end-credits-text-container">
-            <div className="w-full max-w-4xl text-center px-4 md:px-8">
-                <LetterReveal 
-                    text={storySections[activeScene].text}
-                    progress={textProgress}
-                    baseColor="rgb(107 114 128)" // gray-500
-                    revealColor="rgb(255 255 255)" // white
-                />
+            <div className="w-full max-w-4xl text-center px-8">
+                {currentSection && (
+                    <LetterReveal 
+                        text={currentSection.text}
+                        progress={textProgress}
+                        baseColor="rgb(107 114 128)" // gray-500
+                        revealColor="rgb(255 255 255)" // white
+                    />
+                )}
             </div>
           </div>
           
           <div className="end-credits-image-container" style={{ opacity: bgOpacity }}>
-            {storySections[activeScene].images.map((image, index) => {
+            {currentSection && currentSection.images.map((image, index) => {
               const imageStart = (index + 1) * imageFadeDuration;
               const imageEnd = imageStart + imageFadeDuration;
 
