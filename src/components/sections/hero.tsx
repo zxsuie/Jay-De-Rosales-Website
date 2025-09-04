@@ -17,11 +17,25 @@ export function Hero() {
         setTransform(`perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg) scale3d(1.05, 1.05, 1.05)`);
       }
     };
+    
+    const handleDeviceOrientation = (e: DeviceOrientationEvent) => {
+      if (typeof window !== 'undefined') {
+        const { beta, gamma } = e; // beta: front-back tilt, gamma: left-right tilt
+        const x = (gamma ?? 0) / 10; // Normalize gamma for rotateY
+        const y = (beta ?? 0) / 10; // Normalize beta for rotateX
+
+        setTransform(`perspective(1000px) rotateY(${x}deg) rotateX(${y}deg) scale3d(1.05, 1.05, 1.05)`);
+      }
+    };
+
 
     window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("deviceorientation", handleDeviceOrientation, true);
+
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("deviceorientation", handleDeviceOrientation, true);
     };
   }, []);
 
