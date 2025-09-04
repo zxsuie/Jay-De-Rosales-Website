@@ -73,7 +73,7 @@ export function Hero() {
                 className="animate-fade-in w-full mix-blend-difference text-white"
                 style={{ animationDelay: '500ms', opacity: 0, animationFillMode: 'forwards' }}
             >
-                <h1 className="text-7xl sm:text-8xl md:text-[10rem] lg:text-[14rem] font-bold font-headline leading-none">
+                <h1 className="text-[18vw] sm:text-[16vw] md:text-[12rem] lg:text-[14rem] font-bold font-headline leading-none">
                     <span className="block">Jay De</span>
                     <span className="block">Rosales</span>
                 </h1>
